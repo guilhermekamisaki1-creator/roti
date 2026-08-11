@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planejamento Acadêmico · 2º Semestre · 2º Ano EM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4EFE4;
+    --paper-2:#EFE9DB;
+    --card:#FBF8F1;
+    --ink:#2A2521;
+    --muted:#837A6C;
+    --line:#E4DCCB;
+    --line-strong:#D6CBB4;
+    --clay:#B0502E;
+    --clay-soft:#E0A488;
+    --critica:#A63D2E;   --critica-bg:#F3E3DE;
+    --importante:#B67A1E; --importante-bg:#F5EBD6;
+    --estavel:#4E7C59;   --estavel-bg:#E4EEE4;
+    --forte:#3E6B8C;     --forte-bg:#E1EAF0;
+    --pass:#2F6B44;
+    /* timeline */
+    --t-aula:#C9B99A;
+    --t-trans:#E6DFD0;
+    --t-estudo:#B0502E;
+    --t-ingles:#3E6B8C;
+    --t-gym:#4E7C59;
+    --t-livre:#EFE9DB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--clay);z-index:200;transition:width .08s linear}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  nav{position:sticky;top:0;z-index:100;background:rgba(244,239,228,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;gap:3px;align-items:center;overflow-x:auto;height:50px;scrollbar-width:none}
+  nav .wrap::-webkit-scrollbar{display:none}
+  nav a{font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--muted);text-decoration:none;white-space:nowrap;padding:6px 10px;border-radius:7px;transition:.15s}
+  nav a:hover{color:var(--ink);background:var(--paper-2)}
+  nav a.active{color:var(--clay);background:#fff}
+
+  header.hero{padding:60px 0 38px}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--clay)}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(32px,5.6vw,54px);line-height:1.03;letter-spacing:-.01em;margin:14px 0 18px;max-width:17ch}
+  .lede{font-size:clamp(16px,2.3vw,18.5px);max-width:62ch;line-height:1.55}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:26px;font-size:13px;color:var(--muted)}
+  .meta-row b{color:var(--ink);font-weight:600}
+  .meta-row .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;display:block;color:var(--muted)}
+
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:13px;margin-bottom:6px}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--clay);font-weight:500;flex-shrink:0}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(23px,3.4vw,32px);letter-spacing:-.01em;line-height:1.1}
+  .sec-sub{color:var(--muted);font-size:15px;max-width:66ch;margin:10px 0 28px}
+  h3{font-family:'Fraunces',serif;font-weight:600;font-size:20px;margin:32px 0 8px}
+  h4{font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:14px;letter-spacing:.02em;margin:24px 0 6px;color:var(--ink)}
+  p{margin:0 0 14px;max-width:72ch}
+  ul.plain{list-style:none;margin:8px 0 16px}
+  ul.plain li{position:relative;padding-left:22px;margin:7px 0;max-width:72ch;font-size:15px}
+  ul.plain li::before{content:"→";position:absolute;left:0;color:var(--clay);font-weight:700}
+  code{font-family:'JetBrains Mono',monospace;font-size:13px;background:var(--paper-2);padding:2px 6px;border-radius:5px}
+
+  .callout{border-left:3px solid var(--clay);background:var(--card);padding:16px 20px;border-radius:0 10px 10px 0;margin:22px 0}
+  .callout .tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:6px;display:block;color:var(--clay)}
+  .callout.warn{border-color:var(--critica);background:var(--critica-bg)}
+  .callout.warn .tag{color:var(--critica)}
+  .callout.note{border-color:var(--forte);background:var(--forte-bg)}
+  .callout.note .tag{color:var(--forte)}
+  .callout.good{border-color:var(--estavel);background:var(--estavel-bg)}
+  .callout.good .tag{color:var(--estavel)}
+  .callout p:last-child{margin-bottom:0}
+  .callout p{max-width:74ch}
+
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:13px;margin:26px 0}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:17px}
+  .kpi .n{font-family:'Fraunces',serif;font-size:36px;font-weight:600;line-height:1;letter-spacing:-.02em}
+  .kpi .n .u{font-size:16px;color:var(--muted);font-weight:500}
+  .kpi .l{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+
+  .table-scroll{overflow-x:auto;margin:6px -4px 20px;padding:0 4px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.wide{min-width:700px}
+  th,td{padding:10px 9px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:1.5px solid var(--line-strong)}
+  td.num,th.num{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:500}
+  tr:hover td{background:var(--card)}
+  td.hora{font-family:'JetBrains Mono',monospace;font-size:12px;white-space:nowrap;color:var(--muted);font-weight:500}
+  .cell-min{color:var(--pass);font-weight:700}
+  .up{color:var(--estavel);font-weight:700}
+  .down{color:var(--critica);font-weight:700}
+  .flat{color:var(--muted);font-weight:700}
+  .grp-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px}
+  .g-crit{background:var(--critica)} .g-imp{background:var(--importante)} .g-est{background:var(--estavel)} .g-for{background:var(--forte)}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:20px;white-space:nowrap;display:inline-block}
+  .chip.crit{background:var(--critica-bg);color:var(--critica)}
+  .chip.imp{background:var(--importante-bg);color:var(--importante)}
+  .chip.est{background:var(--estavel-bg);color:var(--estavel)}
+  .chip.for{background:var(--forte-bg);color:var(--forte)}
+
+  /* SIGNATURE: timeline semanal */
+  .tl{margin:26px 0 10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px 16px}
+  .tl-scale{display:flex;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted);margin-left:62px;margin-bottom:6px}
+  .tl-scale span{flex:1;text-align:left}
+  .tlrow{display:flex;align-items:center;margin:5px 0}
+  .tlrow .d{width:62px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+  .tlbar{flex:1;display:flex;height:22px;border-radius:5px;overflow:hidden;border:1px solid var(--line)}
+  .tlbar div{height:100%}
+  .s-aula{background:var(--t-aula)} .s-trans{background:var(--t-trans)} .s-estudo{background:var(--t-estudo)}
+  .s-ingles{background:var(--t-ingles)} .s-gym{background:var(--t-gym)} .s-livre{background:var(--t-livre)}
+  .tl-legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:11.5px;color:var(--muted);margin-left:62px}
+  .tl-legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.07)}
+
+  /* grupos */
+  .grpblock{border-radius:14px;padding:20px 22px;margin:16px 0;border:1px solid}
+  .grpblock.crit{background:var(--critica-bg);border-color:#E3C7BF}
+  .grpblock.imp{background:var(--importante-bg);border-color:#E7D3A6}
+  .grpblock.est{background:var(--estavel-bg);border-color:#C9DDC9}
+  .grpblock.for{background:var(--forte-bg);border-color:#C3D5E1}
+  .grpblock h3{margin:0 0 3px;display:flex;align-items:center;gap:10px;font-size:19px}
+  .grpblock .gcount{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--muted)}
+  .grpblock .members{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+  .grpblock .members span{background:rgba(255,255,255,.62);border:1px solid rgba(0,0,0,.06);border-radius:20px;padding:3px 11px;font-size:12.5px;font-weight:600}
+  .grpblock p{font-size:14.5px;max-width:76ch}
+
+  /* dia cards */
+  .daycard{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:18px 0;overflow:hidden}
+  .daycard .dh{padding:15px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .daycard .dh .dn{font-family:'Fraunces',serif;font-size:19px;font-weight:600}
+  .daycard .dh .dm{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .daycard .dbody{padding:4px 20px 14px}
+  .daycard table{font-size:13px}
+  .daycard th{position:static}
+
+  /* gargalos */
+  .bottleneck{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--critica);border-radius:0 12px 12px 0;padding:16px 20px;margin:14px 0}
+  .bottleneck .bt{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--critica);font-weight:600;margin-bottom:5px}
+  .bottleneck.opp{border-left-color:var(--estavel)}
+  .bottleneck.opp .bt{color:var(--estavel)}
+  .bottleneck h4{margin:0 0 6px;font-family:'Fraunces',serif;font-weight:600;font-size:17px}
+  .bottleneck p{font-size:14px;margin-bottom:8px}
+  .bottleneck .fix{font-size:14px;background:var(--paper-2);border-radius:8px;padding:10px 13px;margin-top:10px}
+  .bottleneck .fix b{color:var(--clay)}
+
+  .final{background:var(--ink);color:#F4EFE4;border-radius:16px;padding:32px 28px;margin-top:16px}
+  .final .eyebrow{color:var(--clay-soft)}
+  .final h2{color:#F7F2E8;margin:8px 0 14px}
+  .final p{color:#D8D0C2;max-width:68ch}
+  .final ol{margin:14px 0 0;padding-left:0;list-style:none;counter-reset:r}
+  .final li{position:relative;padding-left:34px;margin:12px 0;color:#E4DCCE;font-size:14.5px;counter-increment:r;max-width:70ch}
+  .final li::before{content:counter(r);position:absolute;left:0;top:1px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--clay-soft);border:1px solid rgba(224,164,136,.4);border-radius:5px;width:21px;height:21px;display:flex;align-items:center;justify-content:center}
+  .final li b{color:#F7F2E8}
+  .final code{background:rgba(255,255,255,.1);color:#F2C9B4}
+
+  footer.pg{padding:36px 0 60px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+  footer.pg .rule{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.05em}
+  .hyp{background:var(--paper-2);border-radius:10px;padding:14px 18px;margin:20px 0;font-size:13.5px;color:var(--muted)}
+  .hyp b{color:var(--ink)}
+
+  @media (max-width:640px){
+    header.hero{padding:40px 0 28px}
+    .tl-scale,.tl-legend{margin-left:0}
+    .tlrow .d{width:44px;font-size:9.5px}
+    table.wide{min-width:620px}
+  }
+  @media print{
+    #progress,nav{display:none}
+    body{background:#fff;font-size:10.5px}
+    section{padding:16px 0;page-break-inside:avoid}
+    .daycard,.grpblock,.bottleneck,.callout{page-break-inside:avoid}
+    .final{background:#f0f0f0;color:#000;border:1px solid #ccc}
+    .final h2,.final p,.final li{color:#000}
+    .table-scroll{overflow:visible}
+    table.wide{min-width:0;font-size:9px}
+    a{color:#000;text-decoration:none}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav><div class="wrap">
+  <a href="#s1">1 · Resumo</a>
+  <a href="#s2">2 · Diagnóstico</a>
+  <a href="#s3">3 · Notas</a>
+  <a href="#s4">4 · Cálculos</a>
+  <a href="#s5">5 · Prioridade</a>
+  <a href="#s5b">5B · Rotina</a>
+  <a href="#s6">6 · Estratégia</a>
+  <a href="#s7">7 · Até agosto</a>
+  <a href="#s8">8 · Cronograma</a>
+  <a href="#s9">9 · Tipos de dia</a>
+  <a href="#s10">10 · Revisões</a>
+  <a href="#s11">11 · Lições</a>
+  <a href="#s12">12 · Simulados</a>
+  <a href="#s13">13 · Contingência</a>
+  <a href="#s14">14 · Indicadores</a>
+  <a href="#s15">15 · Final</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">Planejamento Integral · rev. 2 · grade nova + provas 24/08</span>
+  <h1>60 dos 100 pontos do ano ainda estão em jogo.</h1>
+  <p class="lede">Revisado para a grade nova e para as provas de 24–28/08. Restam <b>10 dias letivos</b> até a primeira prova. A boa notícia: a grade nova distribuiu Química em quatro dias e mudou Sociologia para uma janela nobre — dois gargalos do plano anterior deixaram de existir. Nada aqui depende de execução perfeita.</p>
+  <div class="meta-row">
+    <div><span class="k">Hoje</span><b>09/08 · domingo</b></div>
+    <div><span class="k">Provas B3</span><b>24–28/08 · seg a sex</b></div>
+    <div><span class="k">Meta</span><b>47,5 pts · disciplina</b></div>
+    <div><span class="k">Estudo próprio</span><b>16h15 / semana</b></div>
+    <div><span class="k">Alvo</span><b>Eng. Produção · USP</b></div>
+  </div>
+</div></header>
+
+<!-- 1 RESUMO EXECUTIVO -->
+<section id="s1"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Resumo executivo</h2></div>
+  <p class="sec-sub">O que este plano decide, em uma página. Se você ler só isto, ainda sai sabendo o que fazer.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="n">1,5<span class="u">×</span></div><div class="l">Quanto vale cada ponto da prova de agosto, em pontos anuais</div></div>
+    <div class="kpi"><div class="n">10</div><div class="l">Dias letivos restantes até a primeira prova (10–21/08)</div></div>
+    <div class="kpi"><div class="n">7,5</div><div class="l">A nota única que, repetida, vira o ano em todas as disciplinas</div></div>
+    <div class="kpi"><div class="n">16<span class="u">h10</span></div><div class="l">Estudo próprio semanal — sustentável, não heroico</div></div>
+  </div>
+
+  <h3>As sete decisões</h3>
+  <ul class="plain">
+    <li><b>O problema não é capacidade, é retenção.</b> Todas as quedas relevantes do 1º semestre (Filosofia −3,5; História, Geografia e Química −2,5; Inglês −2,0) são de matérias que exigem revisão espaçada. O que você pratica toda semana — Física, Matemática — se segurou. A intervenção de maior impacto do semestre é <b>um único sistema de revisão espaçada</b>, e ele é o esqueleto deste plano.</li>
+    <li><b>Cada ponto em agosto vale 50% mais que qualquer ponto do 1º semestre.</b> No B1/B2, a média valia ×2 e cada ponto de prova rendia 1,0 anual. No B3/B4, a média vale ×3 e cada ponto rende 1,5. Você nunca vai encontrar uma prova mais barata de estudar do que a de 25–31 de agosto.</li>
+    <li><b>Um número: 7,5.</b> Se você tirar 7,5 em todas as provas do 3º bimestre, o 4º bimestre inteiro vira zona de conforto — a média mínima que sobra para passar cai para 2,7 na pior disciplina (Sociologia) e 0,0 em Filosofia. Bancar cedo é a jogada matematicamente dominante.</li>
+    <li><b>Química é a maior alavanca do boletim.</b> É a única com risco de aprovação alto <em>e</em> peso máximo no vestibular. Recebe 24% do seu estudo próprio (3h55/semana) — mais que qualquer outra.</li>
+    <li><b>Inglês recebe zero horas de estudo.</b> Seu 3,5 foi desengajamento, não dificuldade. Entregar tudo no prazo recupera a nota. As horas economizadas financiam Química. É o melhor retorno/esforço disponível.</li>
+    <li><b>A grade nova consertou o maior problema do plano anterior.</b> Química deixou de ser um bloco de três aulas na terça e passou a ocupar quatro dias (Seg, Ter, Qui, Sex ×2), com intervalo máximo de 3 dias. Melhor ainda: na segunda ela é a <em>última aula</em> — sua janela nobre abre 65 minutos depois. É o melhor D0 possível. Detalhado na seção 5B.</li>
+    <li><b>O novo gargalo é a sexta-feira.</b> Química ×2, Matemática ×2, Biologia ×3 e História, tudo numa janela de 1h30 com teto rígido às 17h. A sexta virou dia de triagem, não de estudo — e o sábado absorve o transbordo por desenho, não por acúmulo.</li>
+    <li><b>O plano é considerado cumprido com 80% dos blocos.</b> Um cronograma que precisa de 100% para funcionar não é um cronograma, é uma fantasia. A seção 13 define exatamente o que cortar quando o dia der errado.</li>
+  </ul>
+
+  <div class="hyp">
+    <b>Hipóteses documentadas</b> (conforme sua instrução de assumir e seguir):
+    25/08 cai numa terça-feira — logo, Dia 1 = ter 25, Dia 2 = qua 26, Dia 3 = qui 27, Dia 4 = sex 28, Dia 5 = seg 31 (pulando o fim de semana). ·
+    “Soc.C.” na grade = “Sociabilidades Contemporâneas” do calendário de provas = sua linha de Sociologia (confirmado por referência cruzada). ·
+    Aulas de ~45 min. ·
+    Janela da tarde começa às 15h30 (14h25 saída + 25 min de deslocamento + almoço).
+    <br><br>
+    <b>Correção aplicada (rev. 1):</b> “Energ.” (Maurício Y) é <b>Energia Molecular — módulo de Química</b>, não de Física. O calendário de provas nomeia três módulos de Química e três de Física (Dinâmica, Hidrostática, Óptica) — sem Energia.<br><br>
+    <b>Revisão 2 — grade nova + provas 24/08:</b> as provas passaram para <b>24 a 28/08 (segunda a sexta)</b>, o que reposiciona todas as vésperas. Novo módulo identificado: <b>Bio-Cel (Biologia Celular, prof. PH)</b>, duas aulas na sexta, integrado a Biologia. Notas, cálculos e classificação (seções 3, 4 e 5) <b>não mudaram</b> — nenhuma nota nova entrou. O que mudou foi tudo que depende de <em>quando</em>: seções 5B, 7, 8, 9 e 15.
+  </div>
+</div></section>
+
+<!-- 2 DIAGNOSTICO -->
+<section id="s2"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Diagnóstico acadêmico completo</h2></div>
+  <p class="sec-sub">Sete das dez disciplinas caíram do 1º para o 2º bimestre. Isso não é ruído — é um padrão com assinatura.</p>
+
+  <h3>O padrão</h3>
+  <p>Organize as dez matérias por tipo de demanda cognitiva e a queda deixa de ser aleatória:</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Perfil da disciplina</th><th>Disciplinas</th><th class="num">Variação B1→B2</th><th>Leitura</th></tr></thead>
+    <tbody>
+      <tr><td><b>Prática contínua</b><br><span style="color:var(--muted);font-size:12px">exercícios semanais</span></td><td>Física, Matemática</td><td class="num"><span class="flat">0,0</span> / <span class="down">−1,0</span></td><td>Seguraram. A prática funciona como revisão embutida.</td></tr>
+      <tr><td><b>Engajamento ativo</b></td><td>Português, Biologia</td><td class="num"><span class="up">+1,0</span> / <span class="up">+0,5</span></td><td>Subiram. Únicas em alta do boletim.</td></tr>
+      <tr><td><b>Memorização + revisão espaçada</b></td><td>Filosofia, História, Geografia, Química, Inglês</td><td class="num"><span class="down">−3,5 · −2,5 · −2,5 · −2,5 · −2,0</span></td><td>Colapsaram. Todas, sem exceção.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warn">
+    <span class="tag">Diagnóstico central</span>
+    <p>Seu método funciona para o que você pratica toda semana e quebra em tudo que exige revisão espaçada. As cinco disciplinas que caíram mais são exatamente as cinco que dependem de manter conteúdo vivo entre uma prova e outra. Você não tem um problema de capacidade nem de esforço. Você tem <b>ausência de sistema de retenção</b> — e um sistema é a única coisa do mundo que se instala uma vez e paga por cinco matérias simultaneamente.</p>
+  </div>
+
+  <h3>O agravante escondido na grade</h3>
+  <p>Sua grade tem <b>40 aulas semanais em 10 disciplinas de boletim</b> (36 aulas) mais 4 aulas de Itinerário Formativo, Educação Física e Ensino Religioso. A distribuição é violentamente desigual:</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Disciplina</th><th class="num">Aulas/sem</th><th>Módulos</th><th>Dias em que aparece</th><th class="num">Maior intervalo sem contato</th></tr></thead>
+    <tbody>
+      <tr><td><b>Português</b></td><td class="num">7</td><td>Gramática · Literatura · L.I.T. · Produção Textual</td><td>Seg, Ter ×2, Qua ×2, Qui ×2</td><td class="num">4 dias</td></tr>
+      <tr style="background:var(--critica-bg)"><td><b>Química</b></td><td class="num">5</td><td>Princípios da Físico-Química · Energia Molecular · Orgânica</td><td><b>Seg, Ter, Qui, Sex ×2</b></td><td class="num"><b>3 dias</b> ↓</td></tr>
+      <tr><td><b>Matemática</b></td><td class="num">5</td><td>Trigonometria · Prob. e Estatística · Est/Álgebra</td><td>Seg, Ter, Qua, Sex ×2</td><td class="num">3 dias</td></tr>
+      <tr><td><b>Física</b></td><td class="num">4</td><td>Óptica · Dinâmica · Hidrostática</td><td>Seg, Qua ×2, Qui</td><td class="num">4 dias</td></tr>
+      <tr><td><b>Biologia</b></td><td class="num">4</td><td>Genética · <b>Biologia Celular</b> (novo módulo)</td><td>Seg, Sex ×3</td><td class="num">4 dias</td></tr>
+      <tr><td><b>História</b></td><td class="num">4</td><td>Hist. da Sociedade · Hist. da Arte</td><td>Ter, Qui ×2, Sex</td><td class="num">4 dias</td></tr>
+      <tr><td><b>Geografia</b></td><td class="num">3</td><td>Geral · Econômica</td><td>Ter, Qui ×2</td><td class="num">5 dias</td></tr>
+      <tr><td><b>Inglês</b></td><td class="num">2</td><td>—</td><td>apenas Qua</td><td class="num">7 dias</td></tr>
+      <tr style="background:var(--importante-bg)"><td><b>Filosofia</b></td><td class="num">1</td><td>—</td><td>apenas Ter <span style="font-size:11px">(1ª aula, 07h05)</span></td><td class="num"><b>7 dias</b></td></tr>
+      <tr style="background:var(--estavel-bg)"><td><b>Sociologia</b></td><td class="num">1</td><td>—</td><td>apenas <b>Seg</b> <span style="font-size:11px">(dia nobre)</span></td><td class="num">7 dias</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Filosofia, Sociologia e Inglês passam <b>sete dias inteiros</b> sem nenhum contato. Sem um mecanismo externo de revisão, a curva de esquecimento vence toda semana — o que explica com precisão cirúrgica a queda de 8,0 para 4,5 em Filosofia. Não foi a matéria que ficou difícil. Foi o intervalo que ficou longo.</p>
+  <p>Duas melhoras da grade nova valem registro. <b>Química caiu de 5 para 3 dias de intervalo máximo</b> e agora aparece em quatro dias da semana — a distribuição faz metade do trabalho de espaçamento sozinha. E <b>Sociologia migrou de terça para segunda</b>: a disciplina com o menor colchão do boletim (17 pts) saiu do dia mais comprimido e caiu numa janela nobre. Filosofia continua na terça, agora como primeira aula (07h05), o que significa <b>oito horas</b> entre a aula e a sua janela de estudo — é a recuperação mais difícil da semana e por isso ganha o primeiro bloco da terça.</p>
+</div></section>
+
+<!-- 3 ANALISE NOTAS -->
+<section id="s3"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Análise detalhada das notas</h2></div>
+  <p class="sec-sub">Disciplina por disciplina: evolução, tendência, risco, esforço cognitivo, revisões e frequência de exercícios.</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr>
+      <th>Disciplina</th><th class="num">B1</th><th class="num">B2</th><th class="num">Δ</th><th class="num">Pts</th>
+      <th>Risco</th><th>Esforço cognitivo</th><th>Revisões/tópico</th><th>Exercícios</th>
+    </tr></thead>
+    <tbody>
+      <tr><td><b>Química</b> <span class="chip crit">Crítica</span></td><td class="num">6,0</td><td class="num">3,5</td><td class="num"><span class="down">−2,5</span></td><td class="num">19,0</td><td>Alto · escola + vestibular</td><td>Muito alto</td><td>3 espaçadas + refação</td><td>4–5×/sem</td></tr>
+      <tr><td><b>Matemática</b> <span class="chip crit">Crítica</span></td><td class="num">6,5</td><td class="num">5,5</td><td class="num"><span class="down">−1,0</span></td><td class="num">24,0</td><td>Baixo escola · alto vestibular</td><td>Alto</td><td>2–3 + refação</td><td>5×/sem</td></tr>
+      <tr><td><b>Física</b> <span class="chip crit">Crítica</span></td><td class="num">6,0</td><td class="num">6,0</td><td class="num"><span class="flat">0,0</span></td><td class="num">24,0</td><td>Baixo escola · alto vestibular</td><td>Alto</td><td>2–3 + refação</td><td>4×/sem</td></tr>
+      <tr><td><b>História</b> <span class="chip imp">Importante</span></td><td class="num">6,0</td><td class="num">3,5</td><td class="num"><span class="down">−2,5</span></td><td class="num">19,0</td><td>Alto · recuperação</td><td>Médio-alto (volume)</td><td>3–4 espaçadas</td><td>2–3×/sem</td></tr>
+      <tr><td><b>Sociologia</b> <span class="chip imp">Importante</span></td><td class="num">4,5</td><td class="num">4,0</td><td class="num"><span class="down">−0,5</span></td><td class="num">17,0</td><td>Alto · menor colchão</td><td>Médio</td><td>2–3</td><td>1–2×/sem</td></tr>
+      <tr><td><b>Português</b> <span class="chip imp">Importante</span></td><td class="num">4,0</td><td class="num">5,0</td><td class="num"><span class="up">+1,0</span></td><td class="num">18,0</td><td>Médio · base baixa, tendência boa</td><td>Médio</td><td>2 + prática de escrita</td><td>1 redação/sem</td></tr>
+      <tr><td><b>Geografia</b> <span class="chip imp">Importante</span></td><td class="num">7,0</td><td class="num">4,5</td><td class="num"><span class="down">−2,5</span></td><td class="num">23,0</td><td>Médio · colchão + queda forte</td><td>Médio</td><td>3</td><td>2×/sem</td></tr>
+      <tr><td><b>Biologia</b> <span class="chip est">Estável</span></td><td class="num">5,5</td><td class="num">6,0</td><td class="num"><span class="up">+0,5</span></td><td class="num">23,0</td><td>Baixo</td><td>Médio</td><td>2–3</td><td>2×/sem</td></tr>
+      <tr><td><b>Filosofia</b> <span class="chip est">Estável</span></td><td class="num">8,0</td><td class="num">4,5</td><td class="num"><span class="down">−3,5</span></td><td class="num">25,0</td><td>Baixo · maior colchão</td><td>Baixo-médio</td><td>2</td><td>1×/sem</td></tr>
+      <tr><td><b>Inglês</b> <span class="chip for">Forte</span></td><td class="num">5,5</td><td class="num">3,5</td><td class="num"><span class="down">−2,0</span></td><td class="num">18,0</td><td>Quase nulo (nível C1/C2)</td><td>Baixo</td><td>nenhuma</td><td>só entregas</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Três leituras que a tabela não mostra</h3>
+  <ul class="plain">
+    <li><b>Filosofia é o paradoxo do boletim:</b> a maior queda (−3,5) e o maior colchão (25 pts). O 8,0 inicial comprou tranquilidade. É por isso que ela está em “Estável” apesar do tombo — o risco de reprovação é o menor de todos.</li>
+    <li><b>Geografia é o alerta antecipado.</b> Caiu de 7,0 (sua melhor nota do B1) para 4,5. Ainda tem colchão, mas é o mesmo padrão de História — que já virou risco de recuperação. Pegar agora custa pouco; pegar em outubro custa caro.</li>
+    <li><b>Inglês tem a nota mais barata do boletim.</b> Com C1/C2 e 6 horas semanais de inglês formal (2 aulas + 4h de curso), o 3,5 é puramente entrega. Nenhuma hora de estudo próprio deveria ir para lá.</li>
+  </ul>
+</div></section>
+
+<!-- 4 CALCULOS -->
+<section id="s4"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Cálculo das médias necessárias</h2></div>
+  <p class="sec-sub">Sistema: média bimestral × 2 no B1/B2, × 3 no B3/B4. Teto anual = 100. Meta = 47,5. Verifiquei os dez totais que você informou contra essa regra — batem exatamente.</p>
+
+  <h4>Cenários (média necessária em <em>cada</em> um dos dois bimestres restantes)</h4>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr>
+      <th>Disciplina</th><th class="num">Pontos atuais</th><th class="num">Faltam</th><th class="num">% dos 60 restantes</th>
+      <th class="num">Mínimo →47,5</th><th class="num">Confortável →60</th><th class="num">Excelente →72</th>
+    </tr></thead>
+    <tbody>
+      <tr><td><span class="grp-dot g-crit"></span><b>Química</b></td><td class="num">19,0</td><td class="num">28,5</td><td class="num">47,5%</td><td class="num cell-min">4,75</td><td class="num">6,83</td><td class="num">8,83</td></tr>
+      <tr><td><span class="grp-dot g-crit"></span><b>Matemática</b></td><td class="num">24,0</td><td class="num">23,5</td><td class="num">39,2%</td><td class="num cell-min">3,92</td><td class="num">6,00</td><td class="num">8,00</td></tr>
+      <tr><td><span class="grp-dot g-crit"></span><b>Física</b></td><td class="num">24,0</td><td class="num">23,5</td><td class="num">39,2%</td><td class="num cell-min">3,92</td><td class="num">6,00</td><td class="num">8,00</td></tr>
+      <tr><td><span class="grp-dot g-imp"></span><b>História</b></td><td class="num">19,0</td><td class="num">28,5</td><td class="num">47,5%</td><td class="num cell-min">4,75</td><td class="num">6,83</td><td class="num">8,83</td></tr>
+      <tr><td><span class="grp-dot g-imp"></span><b>Sociologia</b></td><td class="num">17,0</td><td class="num">30,5</td><td class="num">50,8%</td><td class="num cell-min">5,08</td><td class="num">7,17</td><td class="num">9,17</td></tr>
+      <tr><td><span class="grp-dot g-imp"></span><b>Português</b></td><td class="num">18,0</td><td class="num">29,5</td><td class="num">49,2%</td><td class="num cell-min">4,92</td><td class="num">7,00</td><td class="num">9,00</td></tr>
+      <tr><td><span class="grp-dot g-imp"></span><b>Geografia</b></td><td class="num">23,0</td><td class="num">24,5</td><td class="num">40,8%</td><td class="num cell-min">4,08</td><td class="num">6,17</td><td class="num">8,17</td></tr>
+      <tr><td><span class="grp-dot g-est"></span><b>Biologia</b></td><td class="num">23,0</td><td class="num">24,5</td><td class="num">40,8%</td><td class="num cell-min">4,08</td><td class="num">6,17</td><td class="num">8,17</td></tr>
+      <tr><td><span class="grp-dot g-est"></span><b>Filosofia</b></td><td class="num">25,0</td><td class="num">22,5</td><td class="num">37,5%</td><td class="num cell-min">3,75</td><td class="num">5,83</td><td class="num">7,83</td></tr>
+      <tr><td><span class="grp-dot g-for"></span><b>Inglês</b></td><td class="num">18,0</td><td class="num">29,5</td><td class="num">49,2%</td><td class="num cell-min">4,92</td><td class="num">7,00</td><td class="num">9,00</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout good">
+    <span class="tag">A regra do 7,5</span>
+    <p>Você não precisa de dez metas. Precisa de uma. <b>Se a média do 3º bimestre for 7,5 em tudo</b> (o que significa ~7,5 na prova de agosto e ~7,5 na de setembro), veja o que sobra para o 4º bimestre:</p>
+  </div>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Disciplina</th><th class="num">Pts após B3 (m3=7,5)</th><th class="num">Média mínima no B4 p/ passar</th><th class="num">Nota final se 7,5 nos dois</th></tr></thead>
+    <tbody>
+      <tr><td><b>Filosofia</b></td><td class="num">47,5</td><td class="num cell-min">0,00</td><td class="num">70,0</td></tr>
+      <tr><td><b>Matemática</b></td><td class="num">46,5</td><td class="num cell-min">0,33</td><td class="num">69,0</td></tr>
+      <tr><td><b>Física</b></td><td class="num">46,5</td><td class="num cell-min">0,33</td><td class="num">69,0</td></tr>
+      <tr><td><b>Geografia</b></td><td class="num">45,5</td><td class="num cell-min">0,67</td><td class="num">68,0</td></tr>
+      <tr><td><b>Biologia</b></td><td class="num">45,5</td><td class="num cell-min">0,67</td><td class="num">68,0</td></tr>
+      <tr><td><b>Química</b></td><td class="num">41,5</td><td class="num cell-min">2,00</td><td class="num">64,0</td></tr>
+      <tr><td><b>História</b></td><td class="num">41,5</td><td class="num cell-min">2,00</td><td class="num">64,0</td></tr>
+      <tr><td><b>Português</b></td><td class="num">40,5</td><td class="num cell-min">2,33</td><td class="num">63,0</td></tr>
+      <tr><td><b>Inglês</b></td><td class="num">40,5</td><td class="num cell-min">2,33</td><td class="num">63,0</td></tr>
+      <tr><td><b>Sociologia</b></td><td class="num">39,5</td><td class="num cell-min">2,67</td><td class="num">62,0</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <span class="tag">Por que bancar cedo é matematicamente dominante</span>
+    <p>Os dois bimestres restantes valem ×3 igualmente. A escolha de <em>onde</em> concentrar esforço é livre — e não é neutra. Ago–set você chega descansado das férias, o conteúdo é fresco, e o volume acumulado ainda é pequeno. Out–nov traz fadiga acumulada, conteúdo empilhado e pressão de fim de ano. <b>Coloque o esforço onde ele rende mais e guarde a margem para quando ela for necessária.</b> Um 7,5 no B3 compra um 4º bimestre inteiro de tranquilidade. O inverso — 5,0 no B3 esperando compensar depois — exige 10,0 em Sociologia no B4. Não é simétrico.</p>
+  </div>
+</div></section>
+
+<!-- 5 CLASSIFICACAO -->
+<section id="s5"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Classificação por prioridade</h2></div>
+  <p class="sec-sub">Nota é só um dos sete critérios. Também pesam: dificuldade, volume de conteúdo, peso no vestibular, necessidade de prática, risco de esquecimento e proximidade das avaliações. É por isso que duas matérias com 24 pontos são “Críticas” e uma com 25 é apenas “Estável”.</p>
+
+  <div class="grpblock crit">
+    <h3><span class="grp-dot g-crit"></span>Críticas <span class="gcount">3 · máxima prioridade · 45% do estudo próprio</span></h3>
+    <div class="members"><span>Química</span><span>Matemática</span><span>Física</span></div>
+    <p>Há dois tipos de “crítico” aqui. <b>Química</b> é crítica pelos dois lados: 19 pontos, queda de −2,5, peso máximo no vestibular de engenharia, exigência de prática intensiva e um método de ensino baseado inteiramente em raciocínio proporcional — que precisa virar automático. <b>Matemática e Física</b> são críticas por <em>estratégia</em>: os 24 pontos aprovam com folga, mas elas são a espinha dorsal de Engenharia de Produção na USP e na Unicamp. Deixá-las “passando estáveis” em 6,0 é falhar no objetivo de longo prazo exatamente no semestre que vale ×3. Um 6,0 estável não é o perfil de quem entra na Poli.</p>
+  </div>
+
+  <div class="grpblock imp">
+    <h3><span class="grp-dot g-imp"></span>Importantes <span class="gcount">4 · recuperação + peso específico</span></h3>
+    <div class="members"><span>História</span><span>Sociologia</span><span>Português</span><span>Geografia</span></div>
+    <p><b>Sociologia</b> (17 pts) e <b>História</b> (19 pts) têm o colchão mais fino e as maiores médias exigidas — risco real de recuperação, e ambas caem no calendário de agosto. <b>Português</b> entra menos pela nota (que está subindo) e mais pelo peso da Redação: é a competência mais transferível do boletim, cobrada em toda banca, e cada texto treinado conta duas vezes. <b>Geografia</b> despencou de 7,0 para 4,5 — ainda tem colchão, mas o sistema de revisão quebrou e o conserto é barato agora, caro depois. História, Geografia e Sociologia compartilham o mesmo remédio: revisão espaçada, não mais horas.</p>
+  </div>
+
+  <div class="grpblock est">
+    <h3><span class="grp-dot g-est"></span>Estáveis <span class="gcount">2 · manutenção, não investimento</span></h3>
+    <div class="members"><span>Biologia</span><span>Filosofia</span></div>
+    <p><b>Biologia</b> é estável pelo motivo saudável: está subindo, o método funciona. Manter e blindar com prática leve de questões — o peso vestibular médio para engenharia limita o retorno de horas extras. <b>Filosofia</b> é estável pelo motivo aritmético: apesar da maior queda do boletim, o 8,0 inicial deixou 25 pontos no banco. Precisa apenas que você reative a revisão que abandonou. Investir mais que isso tem custo de oportunidade alto contra Química.</p>
+  </div>
+
+  <div class="grpblock for">
+    <h3><span class="grp-dot g-for"></span>Fortes <span class="gcount">1 · proteger com esforço próximo de zero</span></h3>
+    <div class="members"><span>Inglês</span></div>
+    <p>Classificação pela <b>capacidade</b>, não pela nota. No papel, 18 pontos e −2,0 assustam; na prática, seu nível C1/C2 torna o conteúdo trivial e o 3,5 foi desengajamento. Ação única: entregar todas as tarefas no prazo. Zero estudo de conteúdo. As horas liberadas aqui são a principal verba que financia Química — e essa realocação é o maior ganho de eficiência disponível no boletim inteiro.</p>
+  </div>
+</div></section>
+
+<!-- 5B ANALISE ESTRUTURAL -->
+<section id="s5b"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">05B</span><h2>Análise estrutural da rotina</h2></div>
+  <p class="sec-sub">Antes de alocar uma hora sequer: onde a sua semana quebra, onde ela ajuda, e o que fazer a respeito. Esta seção é a razão de o cronograma da seção 8 ter a forma que tem.</p>
+
+  <h3>A semana como ela realmente é</h3>
+  <p>Escola 07h05–14h20 (7h15/dia). Saída 14h25, deslocamento 20–30 min, almoço. Janela de estudo abre às <b>15h30</b>. Academia 5×/semana. Curso de inglês terça e quinta, 17h–19h.</p>
+
+  <div class="tl">
+    <div class="tl-scale"><span>07h</span><span>10h</span><span>13h</span><span>16h</span><span>19h</span><span style="flex:0">22h</span></div>
+    <div class="tlrow"><div class="d">Seg</div><div class="tlbar">
+      <div class="s-livre" style="width:0.56%"></div><div class="s-aula" style="width:48.33%"></div><div class="s-trans" style="width:7.78%"></div><div class="s-estudo" style="width:20%"></div><div class="s-trans" style="width:3.33%"></div><div class="s-gym" style="width:10%"></div><div class="s-livre" style="width:10%"></div></div></div>
+    <div class="tlrow"><div class="d">Ter</div><div class="tlbar">
+      <div class="s-livre" style="width:0.56%"></div><div class="s-aula" style="width:48.33%"></div><div class="s-trans" style="width:7.78%"></div><div class="s-estudo" style="width:7.78%"></div><div class="s-trans" style="width:2.22%"></div><div class="s-ingles" style="width:13.33%"></div><div class="s-trans" style="width:1.67%"></div><div class="s-gym" style="width:10%"></div><div class="s-livre" style="width:8.33%"></div></div></div>
+    <div class="tlrow"><div class="d">Qua</div><div class="tlbar">
+      <div class="s-livre" style="width:0.56%"></div><div class="s-aula" style="width:48.33%"></div><div class="s-trans" style="width:7.78%"></div><div class="s-estudo" style="width:20%"></div><div class="s-trans" style="width:3.33%"></div><div class="s-gym" style="width:10%"></div><div class="s-livre" style="width:10%"></div></div></div>
+    <div class="tlrow"><div class="d">Qui</div><div class="tlbar">
+      <div class="s-livre" style="width:0.56%"></div><div class="s-aula" style="width:48.33%"></div><div class="s-trans" style="width:7.78%"></div><div class="s-estudo" style="width:7.78%"></div><div class="s-trans" style="width:2.22%"></div><div class="s-ingles" style="width:13.33%"></div><div class="s-trans" style="width:1.67%"></div><div class="s-gym" style="width:10%"></div><div class="s-livre" style="width:8.33%"></div></div></div>
+    <div class="tlrow"><div class="d">Sex</div><div class="tlbar">
+      <div class="s-livre" style="width:0.56%"></div><div class="s-aula" style="width:48.33%"></div><div class="s-trans" style="width:7.78%"></div><div class="s-estudo" style="width:10%"></div><div class="s-livre" style="width:13.33%"></div><div class="s-gym" style="width:10%"></div><div class="s-livre" style="width:10%"></div></div></div>
+    <div class="tlrow"><div class="d">Sáb</div><div class="tlbar">
+      <div class="s-livre" style="width:20%"></div><div class="s-estudo" style="width:35.56%"></div><div class="s-livre" style="width:44.44%"></div></div></div>
+    <div class="tlrow"><div class="d">Dom</div><div class="tlbar">
+      <div class="s-livre" style="width:20%"></div><div class="s-estudo" style="width:21.11%"></div><div class="s-livre" style="width:58.89%"></div></div></div>
+    <div class="tl-legend">
+      <span><i class="sw s-aula"></i>Escola</span>
+      <span><i class="sw s-trans"></i>Deslocamento / almoço</span>
+      <span><i class="sw s-estudo"></i>Janela de estudo</span>
+      <span><i class="sw s-ingles"></i>Curso de inglês</span>
+      <span><i class="sw s-gym"></i>Academia</span>
+      <span><i class="sw s-livre"></i>Livre</span>
+    </div>
+  </div>
+
+  <h3>Gargalos</h3>
+
+  <div class="bottleneck">
+    <div class="bt">Gargalo 1 · o novo dia crítico</div>
+    <h4>Sexta-feira empilha 8 aulas pesadas numa janela de 1h30</h4>
+    <p>A grade nova concentrou na sexta: <b>Química ×2</b> (Físico-Química + Energia Molecular), <b>Matemática ×2</b> (Prob. e Estatística), <b>Biologia ×3</b> (Genética + Bio-Celular ×2) e História. São oito aulas, todas de boletim, todas de disciplinas que exigem consolidação — e você tem <b>1h30 com teto rígido às 17h</b>. É matematicamente impossível consolidar tudo ali.</p>
+    <div class="fix"><b>Solução:</b> sexta deixa de ser dia de estudo e vira <b>dia de triagem</b>. Nos 90 minutos você faz só três coisas: captura de todas as aulas, Química D0 (as duas aulas, 30 min) e o fecho de semana. Matemática e Biologia da sexta <b>não são estudadas na sexta</b> — elas caem no sábado por desenho, não por acúmulo. A diferença importa: um bloco planejado para sábado é um bloco; um bloco que “sobrou” da sexta é dívida.</div>
+  </div>
+
+  <div class="bottleneck">
+    <div class="bt">Gargalo 2 · defasagem</div>
+    <h4>Filosofia é a primeira aula de terça — e sua janela abre 8 horas depois</h4>
+    <p>Uma aula por semana já era o pior caso do boletim. Agora ela acontece às <b>07h05</b>, e a sua primeira oportunidade de recuperá-la é às 15h30 — mais de oito horas de defasagem, depois de sete outras aulas terem passado por cima. É a recuperação mais difícil da sua semana inteira.</p>
+    <div class="fix"><b>Solução:</b> Filosofia recebe o <b>primeiro bloco da terça</b>, antes de qualquer outra coisa, enquanto a fadiga da janela ainda é mínima. Doze minutos, 8 flashcards, uma pergunta de “por quê”. E — se conseguir — dois minutos de anotação no intervalo entre a 1ª e a 2ª aula, ainda na escola. Esse par de minutos vale mais que vinte à noite.</div>
+  </div>
+
+  <div class="bottleneck">
+    <div class="bt">Gargalo 3 · assimetria</div>
+    <h4>65% do seu tempo útil de semana continua em dois dias</h4>
+    <p>Segunda e quarta oferecem 3h de janela cada. Terça e quinta, 1h05. Sexta, 1h30 com teto rígido. Um cronograma que distribui as matérias uniformemente pelos cinco dias é fisicamente impossível de executar.</p>
+    <div class="fix"><b>Solução:</b> assumir a assimetria. Segunda e quarta são <b>dias nobres</b> — dois blocos de prática profunda cada. Terça e quinta são <b>dias comprimidos</b> — captura e Química D0, nada mais. Sexta é <b>triagem</b>. Sábado é onde a prática de vestibular acontece.</div>
+  </div>
+
+  <div class="bottleneck">
+    <div class="bt">Gargalo 4 · calendário</div>
+    <h4>Restam 10 dias letivos. As provas caem de segunda a sexta.</h4>
+    <p>Hoje é domingo, 09/08. Restam duas semanas de aula (10–14 e 17–21) antes da primeira prova, em <b>24/08, segunda-feira</b>. O calendário agora se encaixa assim:</p>
+    <div class="table-scroll"><table>
+      <thead><tr><th>Dia</th><th>Data</th><th>Disciplinas</th><th>Véspera</th><th>Janela da véspera</th></tr></thead>
+      <tbody>
+        <tr><td>Dia 1</td><td>seg 24/08</td><td>Biologia · Português · Redação</td><td>dom 23</td><td style="color:var(--pass);font-weight:600">fim de semana inteiro ✓✓</td></tr>
+        <tr><td>Dia 2</td><td>ter 25/08</td><td>Química (3 módulos) · História (2) · Inglês</td><td>seg 24</td><td style="color:var(--pass);font-weight:600">tarde nobre 3h ✓</td></tr>
+        <tr style="background:var(--critica-bg)"><td>Dia 3</td><td>qua 26/08</td><td>Matemática · Geografia · Sociabilidades</td><td>ter 25</td><td style="color:var(--critica);font-weight:600">1h05 + inglês + academia ⚠</td></tr>
+        <tr><td>Dia 4</td><td>qui 27/08</td><td>Física · Filosofia</td><td>qua 26</td><td style="color:var(--pass);font-weight:600">tarde nobre 3h ✓</td></tr>
+        <tr style="background:var(--critica-bg)"><td>Dia 5</td><td>sex 28/08</td><td>~80 objetivas · integradora</td><td>qui 27</td><td style="color:var(--critica);font-weight:600">1h05 + inglês + academia ⚠</td></tr>
+      </tbody>
+    </table></div>
+    <div class="fix"><b>Mudou quem precisa de antecipação.</b> No calendário antigo, Química e Física tinham vésperas comprimidas — agora as duas caem em dias nobres. Os novos casos críticos são o <b>Dia 3 (Matemática + Geografia + Sociologia)</b> e o <b>Dia 5</b>. Logo: a consolidação profunda de Matemática, Geografia e Sociologia é <b>antecipada para sábado 22/08</b>, e a véspera (ter 25) vira só reativação — que cabe folgado em 1h05.<br><br>
+    Sobre o curso de inglês em 25 e 27/08: continua valendo a sugestão de <b>negociar reposição ou falta justificada</b> nessas duas datas, com duas semanas de antecedência. Não é abandonar nada — são duas aulas, uma vez no semestre, nas duas únicas vésperas apertadas que sobraram.</div>
+  </div>
+
+  <h3>Oportunidades</h3>
+
+  <div class="bottleneck opp">
+    <div class="bt">Oportunidade 1 · a melhor da grade nova</div>
+    <h4>Na segunda, Química é a última aula — e sua janela abre 65 minutos depois</h4>
+    <p>Princípios da Físico-Química com o Renato é a 8ª aula de segunda, 13h40–14h25. Você sai da escola às 14h25 e às 15h30 está estudando. <b>Sessenta e cinco minutos entre a aula e a recuperação ativa, dentro da sua melhor janela da semana.</b> É o D0 mais eficiente que uma grade pode oferecer, e ele caiu no colo. O bloco de segunda passa a ser o carro-chefe da Química.</p>
+  </div>
+
+  <div class="bottleneck opp">
+    <div class="bt">Oportunidade 2</div>
+    <h4>Quarta não tem Química — o que a torna o dia perfeito para revisá-la</h4>
+    <p>Sem aula nova competindo por atenção, o bloco de quarta vira <b>espaçamento puro</b>: D+2 da Físico-Química de segunda e D+1 da Orgânica de terça. Dois intervalos de recuperação ideais num único bloco de 50 minutos, na segunda melhor janela da semana. Nenhum conteúdo novo, só consolidação — que é exatamente o que faltava no 1º semestre.</p>
+  </div>
+
+  <div class="bottleneck opp">
+    <div class="bt">Oportunidade 3</div>
+    <h4>Sociologia saiu do pior dia e caiu no melhor</h4>
+    <p>É a disciplina com o menor colchão do boletim (17 pts, a maior média futura exigida: 5,08) e tem <b>uma</b> aula por semana. Na grade antiga ela caía na terça, espremida entre três aulas de Química e o curso de inglês. Agora é a 6ª aula de <b>segunda</b>, com uma janela de 3h logo depois. O tratamento continua barato — 12 minutos de captura — mas passou a acontecer num dia em que você tem folga para fazê-lo direito.</p>
+  </div>
+
+  <div class="bottleneck opp">
+    <div class="bt">Oportunidade 4</div>
+    <h4>Inglês concentrado na quarta resolve o problema de entrega</h4>
+    <p>As duas aulas de Inglês agora são 2ª e 3ª aulas de quarta — um dia nobre. Isso significa que a checagem “tudo entregue?” acontece numa tarde com 3h de janela, e não mais espremida no fim da sexta. Continua valendo zero hora de estudo de conteúdo: a única ação é confirmar entregas, e ela custa dois minutos.</p>
+  </div>
+
+  <div class="callout warn">
+    <span class="tag">Risco de sobrecarga · sábado</span>
+    <p>Sábado é o único dia com mais de 3h disponíveis. É onde todo estudante empilha o que não fez na semana — e é onde a maioria dos cronogramas morre. Neste plano o sábado tem <b>4h efetivas dentro de uma janela de 5h20</b>: 45 min de pausas obrigatórias e 30 de almoço. Domingo termina às 13h10, com a tarde inteira reservada para recuperação. Isso não é generosidade; é a condição para você ainda estar executando este plano em novembro.</p>
+  </div>
+</div></section>
+
+<!-- 6 ESTRATEGIA GERAL -->
+<section id="s6"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Estratégia geral para o semestre</h2></div>
+  <p class="sec-sub">Uma arquitetura de três camadas, e uma técnica dominante por perfil de disciplina. Nada aqui é escolhido por ser famoso.</p>
+
+  <h3>A arquitetura de três camadas</h3>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Camada</th><th>Quando</th><th>Duração</th><th>O que é</th><th>Por que existe</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>1 · Captura</b></td><td>Todo dia, D0</td><td>10–15 min</td>
+        <td>Transformar as aulas do dia em 8–14 perguntas (flashcards) e registrar as dúvidas. Sem reler nada.</td>
+        <td>Ataca diretamente o diagnóstico: o conteúdo evapora entre as aulas. Custo baixíssimo, cobertura total das 10 disciplinas.</td>
+      </tr>
+      <tr>
+        <td><b>2 · Prática profunda</b></td><td>Seg, Qua, Sáb</td><td>Blocos de 50 min</td>
+        <td>Exercícios, resolução, redação, correção ativa de erros. Concentrada nas Críticas.</td>
+        <td>É onde a nota é construída. Só acontece nas janelas nobres, porque exige carga cognitiva alta e blocos contínuos.</td>
+      </tr>
+      <tr>
+        <td><b>3 · Revisão espaçada</b></td><td>Todo dia, inclusive pós-academia</td><td>10–15 min</td>
+        <td>Anki. As cartas devidas, nada além.</td>
+        <td>É o que mantém Filosofia e Sociologia vivas durante os 7 dias de intervalo. Sobrevive à fadiga porque é quase automática.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <span class="tag">Regra que sustenta tudo</span>
+    <p>As camadas 1 e 3 <b>nunca são cortadas</b>. Elas custam 25 min por dia e carregam cinco disciplinas. A camada 2 é a que absorve os imprevistos. Se você só conseguir fazer captura + Anki numa semana ruim, o sistema continua funcionando.</p>
+  </div>
+
+  <h3>Técnica dominante por perfil de disciplina</h3>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Perfil</th><th>Disciplinas</th><th>Técnica dominante</th><th>Justificativa</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Resolução</b></td><td>Química, Matemática, Física</td>
+        <td>Retrieval practice via exercícios + <b>interleaving</b> entre módulos + correção ativa de erros</td>
+        <td>Em disciplinas de resolução, o teste <em>é</em> o estudo. Interleaving (alternar Trigonometria/Probabilidade/Álgebra em vez de fazer 20 questões seguidas do mesmo tipo) piora a sensação de aprendizado e melhora o desempenho na prova, porque força você a <em>escolher</em> o método em vez de aplicá-lo no automático — que é exatamente o que a prova cobra. Reler teoria é a atividade de menor retorno possível aqui.</td>
+      </tr>
+      <tr style="background:var(--critica-bg)">
+        <td><b>Química, especificamente</b></td><td>Físico-Química, Orgânica</td>
+        <td>Prática deliberada do <b>esquema de montagem proporcional</b></td>
+        <td>Seu curso ensina Química por raciocínio proporcional, sem fórmulas prontas. Isso muda a unidade de treino: o que precisa virar automático não é a fórmula, é a <em>montagem</em>. Regra fixa em toda questão: <b>escreva a proporção completa antes de calcular qualquer número.</b> O erro típico não está na conta — está na relação. Cada erro vira um cartão que pergunta “qual grandeza é proporcional a qual, e por quê?”.</td>
+      </tr>
+      <tr>
+        <td><b>Conceitual</b></td><td>História, Geografia, Sociologia, Filosofia</td>
+        <td>Active recall + spaced repetition + <b>elaboração</b> + dual coding</td>
+        <td>Aqui o inimigo é o intervalo, não a dificuldade. Flashcards resolvem o intervalo. Mas cartão de definição pura é raso: cada tópico ganha ao menos <b>uma pergunta de “por quê”</b> (elaboração), que é o que a banca cobra. Dual coding (linha do tempo para História, mapa para Geografia) adiciona um segundo canal de recuperação.</td>
+      </tr>
+      <tr>
+        <td><b>Híbrido</b></td><td>Biologia · Genética · Bio-Celular</td>
+        <td>Flashcards (nomenclatura, Bio-Celular) + resolução (problemas de genética)</td>
+        <td>Genética é a única parte de Biologia que se comporta como exata. Bio-Celular é módulo novo e puramente conceitual. Trate os três com técnicas diferentes dentro do mesmo bloco.</td>
+      </tr>
+      <tr>
+        <td><b>Híbrido</b></td><td>Português</td>
+        <td>Gramática = exercícios · Literatura = flashcards + esquemas · <b>Redação = prática deliberada com reescrita</b></td>
+        <td>Escrever um texto por semana sem reescrever é treinar o erro. O ganho está no passo que quase todo mundo pula: <b>reescrever o parágrafo mais fraco</b> do texto anterior antes de começar o novo. 10 minutos, retorno desproporcional.</td>
+      </tr>
+      <tr>
+        <td><b>Zero</b></td><td>Inglês</td>
+        <td>Nenhuma. Só entrega.</td>
+        <td>C1/C2 + 6h semanais de inglês formal. Estudar conteúdo seria desperdício puro. A nota é recuperada com um calendário de entregas, não com estudo.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Distribuição do tempo — e por que ela é essa</h3>
+  <p>A tabela abaixo é a resposta à pergunta “por que Química tem o dobro de Matemática, se Matemática pesa mais no vestibular?”. Porque tempo de aula também é tempo de exposição.</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Disciplina</th><th class="num">Aula/sem</th><th class="num">Estudo próprio</th><th class="num">Exposição total</th><th class="num">% do estudo próprio</th><th>Justificativa</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--critica-bg)"><td><b>Química</b></td><td class="num">3h45</td><td class="num"><b>4h05</b></td><td class="num">7h50</td><td class="num">25%</td><td>Três módulos, pior nota do trio (19 pts), maior queda, peso máximo no vestibular — e os três caem na mesma prova. Ganha bloco em Seg, Qua e Sáb, mais D0 curto em Ter, Qui e Sex.</td></tr>
+      <tr><td><b>Matemática</b></td><td class="num">3h45</td><td class="num">2h00</td><td class="num">5h45</td><td class="num">12%</td><td>5 aulas já entregam volume. Sobe um pouco: agora tem duas aulas na sexta, que transbordam para o sábado.</td></tr>
+      <tr><td><b>Física</b></td><td class="num">3h00</td><td class="num">1h55</td><td class="num">4h55</td><td class="num">12%</td><td>Só 4 aulas — a menor exposição entre os críticos. Dinâmica ×2 na quarta nobre e Hidrostática como última aula de quinta ajudam.</td></tr>
+      <tr><td><b>Português</b></td><td class="num">5h15</td><td class="num">1h25</td><td class="num">6h40</td><td class="num">9%</td><td>Quase tudo é Redação. Duas aulas de L.P.T. (Qua e Qui) alimentam o bloco de sábado.</td></tr>
+      <tr><td><b>Biologia</b></td><td class="num">3h00</td><td class="num">0h55</td><td class="num">3h55</td><td class="num">6%</td><td>Módulo novo (Bio-Celular) entra aqui. Três aulas na sexta obrigam parte do trabalho a migrar para o sábado.</td></tr>
+      <tr><td><b>História</b></td><td class="num">3h00</td><td class="num">0h30</td><td class="num">3h30</td><td class="num">3%</td><td>Carregada pelo Anki diário. Alterna com Geografia no bloco de quinta.</td></tr>
+      <tr><td><b>Geografia</b></td><td class="num">2h15</td><td class="num">0h25</td><td class="num">2h40</td><td class="num">3%</td><td>Duas aulas na quinta. Alterna com História no bloco daquele dia.</td></tr>
+      <tr><td><b>Filosofia</b></td><td class="num">0h45</td><td class="num">0h08</td><td class="num">0h53</td><td class="num">1%</td><td>Maior colchão do boletim. 8 flashcards/semana bastam.</td></tr>
+      <tr><td><b>Sociologia</b></td><td class="num">0h45</td><td class="num">0h07</td><td class="num">0h52</td><td class="num">1%</td><td>Peso vestibular baixo. Regularidade &gt; volume.</td></tr>
+      <tr><td><b>Inglês</b></td><td class="num">1h30 + 4h curso</td><td class="num">0h00</td><td class="num">5h30</td><td class="num">0%</td><td>Decisão deliberada. As horas foram para Química.</td></tr>
+      <tr style="border-top:2px solid var(--line-strong)"><td><b>Sistema</b><br><span style="font-size:12px;color:var(--muted)">captura · Anki · simulado · correção de erros · planejamento</span></td><td class="num">—</td><td class="num"><b>4h55</b></td><td class="num">4h55</td><td class="num">30%</td><td>Um terço do tempo não é “estudar matéria” — é o que garante que o outro terço não evapore. Este é o investimento que faltou no 1º semestre.</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Repare na coluna “exposição total”: <b>Química 7h50, Matemática 5h45, Física 4h55.</b> Química lidera com folga, e isso é deliberado — três módulos, a pior nota do trio, a maior queda, e os três caindo na mesma prova. Física recebe proporcionalmente mais estudo próprio que Matemática apesar do peso vestibular semelhante, porque tem uma aula a menos por semana. A distribuição do estudo existe para <em>corrigir</em> a assimetria da grade, não para repeti-la.</p>
+</div></section>
+
+<!-- 7 ATE AGOSTO -->
+<section id="s7"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Estratégia até as provas de agosto</h2></div>
+  <p class="sec-sub">Hoje é domingo, 09/08. Restam <b>10 dias letivos</b> e duas semanas de calendário. As provas vão de segunda 24 a sexta 28.</p>
+
+  <div class="callout warn">
+    <span class="tag">A conta do tempo, sem rodeio</span>
+    <p>O plano original previa uma semana de instalação suave antes do regime pleno. <b>Essa margem não existe mais.</b> Com duas semanas até a prova, o sistema de revisão precisa começar amanhã, dia 10, já rodando — porque o <b>Dia 5</b> (80 objetivas integradoras) mede exatamente aquilo que só se constrói com repetição diária. Cada dia que o Anki não roda é um dia que o Dia 5 fica mais caro.</p>
+  </div>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Semana</th><th>Datas</th><th>Regime</th><th>Foco</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>S1 · Instalação em marcha</b></td><td>seg 10 – dom 16</td><td>Cronograma padrão, 100%</td>
+        <td>Rodar o cronograma da seção 8 completo desde o primeiro dia. Metas inegociáveis desta semana: (a) criar os baralhos de Anki — <b>três só de Química</b>, um por módulo; (b) abrir o log de erros; (c) captura D0 <b>todos os dias, sem exceção</b>. O primeiro simulado interleaved acontece no domingo 16 e serve de linha de base: a nota dele não importa, o que importa é saber onde você está.</td>
+      </tr>
+      <tr style="background:var(--importante-bg)">
+        <td><b>S2 · Virada para a prova</b></td><td>seg 17 – sex 21</td><td>Conteúdo de prova</td>
+        <td>Últimos cinco dias de aula. Os blocos de prática profunda trocam questões de vestibular por <b>questões no estilo da prova da escola</b>. Nenhum conteúdo novo entra no Anki depois de sexta 21 — a partir dali é só revisão. Confirme com os professores, ainda nesta semana, o recorte exato de cada prova.</td>
+      </tr>
+      <tr style="background:var(--critica-bg)">
+        <td><b>Fim de semana decisivo</b></td><td>sáb 22 – dom 23</td><td>Antecipação</td>
+        <td>O fim de semana mais importante do bimestre. <b>Sábado 22:</b> consolidação de Matemática, Geografia e Sociologia — as três do Dia 3, cuja véspera é comprimida — mais o simulado interleaved de preparação para o Dia 5. <b>Domingo 23:</b> Biologia, Português e Redação, que são a prova de amanhã.</td>
+      </tr>
+      <tr>
+        <td><b>S3 · Semana de prova</b></td><td>seg 24 – sex 28</td><td>Revisão leve · zero conteúdo novo</td>
+        <td>Cada tarde prepara a prova do dia seguinte. Como Química e Física agora caem em vésperas nobres, elas recebem consolidação real; as vésperas comprimidas só precisam sustentar o que já foi consolidado em 22/08.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <h3>Semana de prova, dia a dia</h3>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Data</th><th>De manhã</th><th>À tarde/noite</th><th>Por quê</th></tr></thead>
+    <tbody>
+      <tr><td><b>sáb 22/08</b></td><td colspan="2"><b>Antecipação:</b> Matemática (50') · Geografia (30') · Sociologia (25') · <b>simulado interleaved de 40 questões</b> + correção. Almoço no meio.</td><td>A véspera do Dia 3 é comprimida. Esta é a consolidação real dessas três.</td></tr>
+      <tr><td><b>dom 23/08</b></td><td colspan="2"><b>Véspera do Dia 1:</b> Biologia — Genética + Bio-Celular (50') · Português — Gramática, Literatura, Interpretação (50') · <b>revisão de repertório para a Redação</b> (30') · Anki geral (30'). Tarde livre.</td><td>Fim de semana inteiro para a primeira prova. É a melhor véspera do calendário.</td></tr>
+      <tr style="background:var(--estavel-bg)"><td><b>seg 24/08</b></td><td><b>Dia 1:</b> Biologia · Português · Redação</td><td>Tarde nobre 3h → <b>Química (3 módulos) + História (2 módulos)</b>. Consolidação de verdade: exercícios, não releitura.</td><td>Véspera nobre para a prova mais pesada do calendário. É a virada em relação ao plano antigo.</td></tr>
+      <tr style="background:var(--critica-bg)"><td><b>ter 25/08</b></td><td><b>Dia 2:</b> Química · História · Inglês</td><td>1h05 → <b>Matemática, Geografia e Sociologia: só Anki + resumo de memória.</b> Inglês 17–19h (ou reposição). Academia.</td><td>A consolidação já foi feita no sábado 22. Aqui é reativação, e reativação cabe em uma hora.</td></tr>
+      <tr style="background:var(--estavel-bg)"><td><b>qua 26/08</b></td><td><b>Dia 3:</b> Matemática · Geografia · Sociabilidades</td><td>Tarde nobre 3h → <b>Física (Óptica, Dinâmica, Hidrostática) + Filosofia</b>.</td><td>Segunda véspera nobre. Física recebe os três módulos com tempo real.</td></tr>
+      <tr style="background:var(--critica-bg)"><td><b>qui 27/08</b></td><td><b>Dia 4:</b> Física · Filosofia</td><td>1h05 → <b>Anki completo, todos os baralhos</b> + as 15 questões com pior taxa de acerto no simulado de 22/08. Inglês (ou reposição). Academia.</td><td>Véspera do Dia 5. É curta — e é exatamente por isso que o Dia 5 se prepara desde 10/08, não aqui.</td></tr>
+      <tr><td><b>sex 28/08</b></td><td><b>Dia 5:</b> ~80 objetivas integradoras</td><td>Acabou. Descanse.</td><td>É o dia em que o Anki construído desde 10/08 paga a conta inteira.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout good">
+    <span class="tag">O que a data nova melhorou</span>
+    <p>No calendário antigo, as vésperas de <b>Química</b> e <b>Física</b> caíam em dias comprimidos — era o pior arranjo possível, já que Química é a sua disciplina de maior risco. Com as provas de segunda a sexta, as duas passaram para vésperas nobres de 3h. Os casos apertados agora são Matemática/Geografia/Sociologia (resolvido por antecipação no sábado 22) e o Dia 5 (que não se resolve por véspera nenhuma — só por Anki diário). <b>É um calendário melhor do que o anterior.</b></p>
+  </div>
+
+  <div class="callout warn">
+    <span class="tag">Ponto de atenção · setembro</span>
+    <p>A prova de agosto é <b>uma das duas notas</b> do 3º bimestre. A de setembro vale exatamente o mesmo. Não existe “passar agosto e relaxar”. Quando sair a data de setembro, o regime das semanas S2 e S3 se repete, encurtado — me manda que eu recalculo com as notas reais de agosto.</p>
+  </div>
+</div></section>
+
+<!-- 8 CRONOGRAMA -->
+<section id="s8"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Cronograma semanal detalhado</h2></div>
+  <p class="sec-sub">Reconstruído sobre a grade nova. Nenhum bloco diz “estudar matemática”: todo bloco tem objetivo, disciplina e técnica. 16h15 efetivas.</p>
+
+  <div class="daycard">
+    <div class="dh"><span class="dn">Segunda-feira</span><span class="dm">DIA NOBRE · 2h40 efetivo · Química como última aula</span></div>
+    <div class="dbody">
+      <p style="font-size:13px;color:var(--muted);margin:12px 0 4px">Aulas: Itinerário ×2 · Óptica · Trigonometria · Gramática · <b>Sociologia</b> · Genética · <b>Físico-Química (13h40–14h25)</b></p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Horário</th><th>Bloco</th><th>Disciplina</th><th>Objetivo da sessão</th><th>Técnica</th></tr></thead>
+        <tbody>
+          <tr><td class="hora">15:30–15:45</td><td>Captura D0</td><td>Todas do dia</td><td>Caderno fechado. 10–14 perguntas sobre as aulas de hoje. Dúvidas registradas.</td><td>Active Recall</td></tr>
+          <tr style="background:var(--estavel-bg)"><td class="hora">15:45–15:57</td><td>Captura crítica</td><td><b>Sociologia</b></td><td>Única aula da semana. 8 flashcards + 1 pergunta de “por quê”. Agora cabe num dia bom.</td><td>Active Recall + Elaboração</td></tr>
+          <tr style="background:var(--critica-bg)"><td class="hora">15:57–16:47</td><td><b>Química D0</b><br><span style="font-size:11.5px;color:var(--muted)">aula terminou há 1h05</span></td><td><b>Química</b> (Princípios da Físico-Química)</td><td>O bloco mais eficiente da semana. Recall da aula de memória + lição resolvida sem consulta + 8 exercícios. <b>Proporção escrita antes de qualquer conta.</b> Erros → log na hora.</td><td>Retrieval + Prática deliberada</td></tr>
+          <tr><td class="hora">16:47–16:57</td><td>Pausa</td><td>—</td><td>Sair da tela. Movimento.</td><td>—</td></tr>
+          <tr><td class="hora">16:57–17:42</td><td>Prática profunda</td><td><b>Matemática</b> (Trigonometria)</td><td>Lição sem consulta + 5 questões de vestibular alternando com Prob./Estatística da semana anterior.</td><td>Retrieval + Interleaving</td></tr>
+          <tr><td class="hora">17:42–17:52</td><td>Pausa</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="hora">17:52–18:20</td><td>Bloco conceitual</td><td><b>Física</b> (Óptica) 15' + <b>Biologia</b> (Genética) 13'</td><td>Óptica: única aula semanal — recall + 3 construções de imagem. Genética: recall + 3 problemas.</td><td>Dual Coding + Retrieval</td></tr>
+          <tr><td class="hora">18:20–18:30</td><td>Revisão espaçada</td><td>Anki</td><td>Cartas devidas. Nada além.</td><td>Spaced Repetition</td></tr>
+          <tr><td class="hora">19:00</td><td>Academia</td><td>—</td><td>Intocável.</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:13.5px;margin-top:12px">Gramática de segunda entra só na captura — é recuperada pelo Anki e pelo bloco de Português de quarta.</p>
+    </div>
+  </div>
+
+  <div class="daycard">
+    <div class="dh"><span class="dn">Terça-feira</span><span class="dm">DIA COMPRIMIDO · 1h20 efetivo · Filosofia com 8h de defasagem</span></div>
+    <div class="dbody">
+      <p style="font-size:13px;color:var(--muted);margin:12px 0 4px">Aulas: <b>Filosofia (07h05)</b> · Ed. Física · Literatura · <b>Química Orgânica</b> · Geo. Geral · Interpretação · Hist. da Arte · Est/Álgebra</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Horário</th><th>Bloco</th><th>Disciplina</th><th>Objetivo da sessão</th><th>Técnica</th></tr></thead>
+        <tbody>
+          <tr style="background:var(--importante-bg)"><td class="hora">15:30–15:42</td><td>Captura crítica<br><span style="font-size:11.5px;color:var(--muted)">primeiro, sempre</span></td><td><b>Filosofia</b></td><td>Única aula da semana e a mais antiga do dia (8h de defasagem). Vem antes de tudo, com a fadiga ainda baixa. 8 flashcards + 1 pergunta de “por quê”.</td><td>Active Recall + Elaboração</td></tr>
+          <tr style="background:var(--critica-bg)"><td class="hora">15:42–16:22</td><td>Química D0</td><td><b>Química</b> (Orgânica)</td><td>Recall da aula + lição sem consulta. Erros vão para o log <em>na hora</em> — são o material do bloco de quarta.</td><td>Retrieval + Correção ativa</td></tr>
+          <tr><td class="hora">16:22–16:40</td><td>Captura rápida</td><td>Geografia · Hist. da Arte · Matemática · Português</td><td>6 flashcards. Anotar lições pendentes e prazos.</td><td>Active Recall</td></tr>
+          <tr><td class="hora">16:45–17:00</td><td>Deslocamento</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="hora">17:00–19:00</td><td>Curso de inglês</td><td>—</td><td>Fixo.</td><td>—</td></tr>
+          <tr><td class="hora">19:15–20:45</td><td>Academia</td><td>—</td><td>Fixo.</td><td>—</td></tr>
+          <tr><td class="hora">~21:20–21:30</td><td>Fecho leve</td><td>Tarefas do curso + Anki</td><td>10 min de Anki. Única tarefa cognitiva que sobrevive à fadiga deste dia.</td><td>Spaced Repetition</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="daycard">
+    <div class="dh"><span class="dn">Quarta-feira</span><span class="dm">DIA NOBRE · 2h40 efetivo · zero Química nova = espaçamento puro</span></div>
+    <div class="dbody">
+      <p style="font-size:13px;color:var(--muted);margin:12px 0 4px">Aulas: Gramática · <b>Inglês ×2</b> · Dinâmica ×2 · Trigonometria · Ens. Religioso · Produção Textual</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Horário</th><th>Bloco</th><th>Disciplina</th><th>Objetivo da sessão</th><th>Técnica</th></tr></thead>
+        <tbody>
+          <tr><td class="hora">15:30–15:45</td><td>Captura D0</td><td>Todas do dia</td><td>10–14 perguntas. <b>Confirmar que toda tarefa de inglês está entregue</b> (as duas aulas foram hoje).</td><td>Active Recall</td></tr>
+          <tr><td class="hora">15:45–16:35</td><td>Prática profunda</td><td><b>Física</b> (Dinâmica ×2)</td><td>Dois tempos seguidos hoje. Recall + lista da escola sem consulta + 4 questões de vestibular.</td><td>Retrieval + Interleaving</td></tr>
+          <tr><td class="hora">16:35–16:45</td><td>Pausa</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr style="background:var(--critica-bg)"><td class="hora">16:45–17:35</td><td><b>Química espaçada</b><br><span style="font-size:11.5px;color:var(--muted)">D+2 de seg · D+1 de ter</span></td><td><b>Química</b> (Físico-Química + Orgânica)</td><td>Sem aula nova hoje — bloco de consolidação pura. <b>15 min:</b> refazer os erros de segunda e terça do zero, sem olhar a correção. <b>35 min:</b> 10 exercícios alternando os dois módulos.</td><td>Correção ativa + Interleaving</td></tr>
+          <tr><td class="hora">17:35–17:45</td><td>Pausa</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="hora">17:45–18:20</td><td>Bloco híbrido</td><td><b>Português</b> (Produção Textual 20' + Gramática 15')</td><td>Esqueleto argumentativo de um tema: tese + 2 argumentos + repertório. Gramática: lição + só as regras que você já errou.</td><td>Prática deliberada</td></tr>
+          <tr><td class="hora">18:20–18:30</td><td>Revisão espaçada</td><td>Anki</td><td>Cartas devidas.</td><td>Spaced Repetition</td></tr>
+          <tr><td class="hora">19:00</td><td>Academia</td><td>—</td><td>Intocável.</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:13.5px;margin-top:12px">Se você só puder executar <b>um</b> bloco de Química na semana, que seja o de segunda (D0 fresco). Se puder dois, o de quarta é o segundo — ele fecha o ciclo de espaçamento dos dois módulos de uma vez.</p>
+    </div>
+  </div>
+
+  <div class="daycard">
+    <div class="dh"><span class="dn">Quinta-feira</span><span class="dm">DIA COMPRIMIDO · 1h20 efetivo · dia pesado de humanas</span></div>
+    <div class="dbody">
+      <p style="font-size:13px;color:var(--muted);margin:12px 0 4px">Aulas: <b>Energia Molecular (07h05)</b> · Geo. Econômica ×2 · Hist. da Sociedade ×2 · Produção Textual · Literatura · <b>Hidrostática (13h40)</b></p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Horário</th><th>Bloco</th><th>Disciplina</th><th>Objetivo da sessão</th><th>Técnica</th></tr></thead>
+        <tbody>
+          <tr><td class="hora">15:30–15:40</td><td>Captura D0</td><td>Todas do dia</td><td>10 perguntas rápidas. Dúvidas registradas.</td><td>Active Recall</td></tr>
+          <tr style="background:var(--critica-bg)"><td class="hora">15:40–16:10</td><td>Química D0</td><td><b>Química</b> (Energia Molecular)</td><td>Aula foi às 07h05 — a recuperação custa mais, e é justamente por isso que vale. 6 exercícios com proporção escrita antes da conta.</td><td>Retrieval + Prática deliberada</td></tr>
+          <tr><td class="hora">16:10–16:25</td><td>Física fresca</td><td><b>Física</b> (Hidrostática)</td><td>Última aula do dia, ainda quente. Recall + 3 exercícios. Única aula semanal do módulo.</td><td>Retrieval</td></tr>
+          <tr><td class="hora">16:25–16:40</td><td>Bloco conceitual<br><span style="font-size:11.5px;color:var(--muted)">alterna por semana</span></td><td><b>História</b> (sem. ímpar)<br><b>Geografia</b> (sem. par)</td><td>Hoje tem duas aulas de cada. História: linha do tempo de memória + 6 flashcards, 2 de “por quê”. Geografia: mapa desenhado de memória + 6 flashcards. A que não sair hoje vai para o bloco de sábado.</td><td>Dual Coding + Elaboração</td></tr>
+          <tr><td class="hora">16:45–19:00</td><td>Deslocamento + curso de inglês</td><td>—</td><td>Fixo.</td><td>—</td></tr>
+          <tr><td class="hora">19:15–20:45</td><td>Academia</td><td>—</td><td>Fixo.</td><td>—</td></tr>
+          <tr><td class="hora">~21:20–21:30</td><td>Fecho leve</td><td>Tarefas do curso + Anki</td><td>10 min de Anki.</td><td>Spaced Repetition</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="daycard">
+    <div class="dh"><span class="dn">Sexta-feira</span><span class="dm">DIA DE TRIAGEM · 1h30 efetivo · teto rígido às 17h · 8 aulas pesadas</span></div>
+    <div class="dbody">
+      <p style="font-size:13px;color:var(--muted);margin:12px 0 4px">Aulas: Genética · Prob./Estatística · <b>Físico-Química</b> · <b>Energia Molecular</b> · Hist. da Sociedade · Prob./Estatística · <b>Bio-Celular ×2</b></p>
+      <div class="callout warn" style="margin:14px 0"><span class="tag">Regra da sexta</span><p>Oito aulas de boletim e 90 minutos. <b>Não tente consolidar tudo hoje.</b> Matemática e Biologia da sexta estão <em>agendadas</em> para o sábado — não são dívida, são desenho. Sexta faz triagem: captura, Química e fecho.</p></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Horário</th><th>Bloco</th><th>Disciplina</th><th>Objetivo da sessão</th><th>Técnica</th></tr></thead>
+        <tbody>
+          <tr><td class="hora">15:30–15:42</td><td>Captura D0 ampliada</td><td>Todas do dia</td><td>Dia mais denso da semana: 14–16 perguntas. Separar o que vai para o sábado.</td><td>Active Recall</td></tr>
+          <tr style="background:var(--critica-bg)"><td class="hora">15:42–16:17</td><td>Química D0</td><td><b>Química</b> (Físico-Química + Energia Molecular)</td><td>Duas aulas hoje. Recall de cada + lição sem consulta. Nunca adiada — é o conteúdo de maior custo de esquecimento.</td><td>Retrieval + Correção ativa</td></tr>
+          <tr><td class="hora">16:17–16:42</td><td>Prática dirigida</td><td><b>Matemática</b> (Prob./Estatística ×2)</td><td>Só a lição da escola, sem consulta. As questões de vestibular ficam para o sábado.</td><td>Retrieval</td></tr>
+          <tr><td class="hora">16:42–16:52</td><td>Captura conceitual</td><td><b>Biologia</b> (Bio-Celular ×2) + <b>História</b></td><td>Módulo novo: 6 flashcards de Bio-Celular. História: 3 flashcards. O aprofundamento é sábado.</td><td>Active Recall</td></tr>
+          <tr style="background:var(--estavel-bg)"><td class="hora">16:52–17:00</td><td>Fecho da semana</td><td>Log + Anki</td><td>Marcar os <b>3 erros mais repetidos</b> da semana — eles são o alvo do bloco de correção de sábado.</td><td>Correção ativa</td></tr>
+          <tr><td class="hora">17:00</td><td>Fim</td><td>—</td><td>Nada acadêmico pesado depois daqui. O teto é seu, respeite-o.</td><td>—</td></tr>
+          <tr><td class="hora">19:00</td><td>Academia</td><td>—</td><td>Intocável.</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="daycard">
+    <div class="dh"><span class="dn">Sábado</span><span class="dm">PRÁTICA PROFUNDA · 4h05 efetivo em janela de 5h20</span></div>
+    <div class="dbody">
+      <div class="table-scroll"><table>
+        <thead><tr><th>Horário</th><th>Bloco</th><th>Disciplina</th><th>Objetivo da sessão</th><th>Técnica</th></tr></thead>
+        <tbody>
+          <tr style="background:var(--critica-bg)"><td class="hora">10:00–10:50</td><td>Vestibular + consolidação</td><td><b>Química</b></td><td>Fecha as duas aulas de sexta + 8 questões FUVEST/Unicamp/Unesp alternando os três módulos. Marcar as que dependem de conteúdo ainda não visto.</td><td>Interleaving + Dificuldade desejável</td></tr>
+          <tr><td class="hora">10:50–11:05</td><td>Pausa</td><td>—</td><td>Obrigatória.</td><td>—</td></tr>
+          <tr><td class="hora">11:05–11:55</td><td>Vestibular</td><td><b>Matemática</b></td><td>Questões alternando Trigonometria, Prob./Estatística e Álgebra — nunca em bloco por assunto.</td><td>Interleaving</td></tr>
+          <tr><td class="hora">11:55–12:10</td><td>Pausa</td><td>—</td><td>Obrigatória.</td><td>—</td></tr>
+          <tr><td class="hora">12:10–12:45</td><td>Lista mista</td><td><b>Física</b></td><td>Óptica + Dinâmica + Hidrostática misturadas — os três módulos da prova, sem saber de antemão qual é qual.</td><td>Interleaving</td></tr>
+          <tr><td class="hora">12:45–13:15</td><td>Almoço</td><td>—</td><td>30 min.</td><td>—</td></tr>
+          <tr style="background:var(--importante-bg)"><td class="hora">13:15–14:05</td><td>Redação</td><td><b>Português</b></td><td><b>10 min:</b> reescrever o parágrafo mais fraco do texto da semana passada. <b>40 min:</b> texto completo cronometrado + autoavaliação por rubrica.</td><td>Prática deliberada</td></tr>
+          <tr><td class="hora">14:05–14:20</td><td>Pausa</td><td>—</td><td>Obrigatória.</td><td>—</td></tr>
+          <tr><td class="hora">14:20–14:50</td><td>Bloco de transbordo<br><span style="font-size:11.5px;color:var(--muted)">alterna por semana</span></td><td><b>Biologia</b> — Genética + Bio-Celular (sem. ímpar)<br><b>Humanas</b> — a que sobrou da quinta (sem. par)</td><td>Aqui aterrissa o que a sexta não comportou. Biologia: problemas de genética + flashcards de Bio-Celular. Humanas: questões + elaboração “por que aconteceu”.</td><td>Retrieval + Elaboração</td></tr>
+          <tr style="background:var(--estavel-bg)"><td class="hora">14:50–15:10</td><td><b>Correção ativa de erros</b></td><td>Toda a semana</td><td>Os 3 erros marcados na sexta. Refazer do zero, sem consultar. Se errar de novo, é conceitual — vira cartão de “por quê”, não de “como”.</td><td>Correção ativa</td></tr>
+          <tr><td class="hora">15:10–15:20</td><td>Anki</td><td>—</td><td>Cartas devidas.</td><td>Spaced Repetition</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:13.5px;margin-top:12px"><b>O bloco de 14:50 é o de maior retorno do seu sábado inteiro.</b> Vinte minutos refazendo três erros valem mais que uma hora de questões novas — porque questão nova testa o que você já sabe, e erro refeito conserta o que você não sabe.</p>
+    </div>
+  </div>
+
+  <div class="daycard">
+    <div class="dh"><span class="dn">Domingo</span><span class="dm">CONSOLIDAÇÃO · 2h40 efetivo · termina 13h10 · tarde livre</span></div>
+    <div class="dbody">
+      <div class="table-scroll"><table>
+        <thead><tr><th>Horário</th><th>Bloco</th><th>Disciplina</th><th>Objetivo da sessão</th><th>Técnica</th></tr></thead>
+        <tbody>
+          <tr><td class="hora">10:00–10:45</td><td>Revisão espaçada profunda</td><td>Todas</td><td>Todos os baralhos. Foco nas cartas marcadas como difíceis — reelaborar a formulação da pergunta, não só revisar.</td><td>Spaced Repetition</td></tr>
+          <tr><td class="hora">10:45–11:00</td><td>Pausa</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr style="background:var(--forte-bg)"><td class="hora">11:00–11:45</td><td><b>Simulado interleaved</b></td><td>Todas</td><td>20 objetivas misturando as 10 disciplinas, cronometrado. <b>Espelha o Dia 5 da prova.</b></td><td>Retrieval + Interleaving</td></tr>
+          <tr><td class="hora">11:45–12:00</td><td>Pausa</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td class="hora">12:00–12:40</td><td>Correção comentada</td><td>Todas</td><td>Cada erro recebe uma frase escrita: <em>“errei porque…”</em>. Atualizar o log e a taxa de acerto por disciplina.</td><td>Correção ativa + Elaboração</td></tr>
+          <tr><td class="hora">12:40–12:55</td><td>Leitura leve</td><td>Literatura</td><td>15 min de leitura da obra/período em estudo. Sem cobrança.</td><td>Elaboração</td></tr>
+          <tr><td class="hora">12:55–13:10</td><td>Planejamento</td><td>—</td><td>Olhar a semana: provas, trabalhos, entregas. Ajustar os blocos de segunda e quarta.</td><td>—</td></tr>
+          <tr style="background:var(--estavel-bg)"><td class="hora">13:10 →</td><td><b>Livre</b></td><td>—</td><td>Recuperação. Isso é parte do plano, não uma falha nele.</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 9 TIPOS DE DIA -->
+<section id="s9"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Estratégia diária por tipo de dia</h2></div>
+  <p class="sec-sub">Quatro arquétipos. Se você entender a lógica de cada um, consegue improvisar quando a semana sair do trilho.</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Tipo</th><th>Dias</th><th>Janela</th><th>Princípio</th><th>O que NUNCA fazer nesse dia</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Nobre</b></td><td>Segunda, Quarta</td><td>3h (2h40 efetivo)</td>
+        <td>Dois blocos de prática profunda separados por pausa real. <b>Segunda:</b> Química D0 às 15h57, com a aula terminada há uma hora — o melhor encaixe da semana. <b>Quarta:</b> Química de espaçamento puro, sem aula nova competindo.</td>
+        <td>Encher com leitura ou resumo. São os únicos dias com carga cognitiva alta e contínua — gastá-los relendo teoria é desperdício estrutural.</td>
+      </tr>
+      <tr>
+        <td><b>Comprimido</b></td><td>Terça, Quinta</td><td>1h05 (+10 min pós-academia)</td>
+        <td>Zero prática profunda. Captura, Química D0 e um bloco conceitual curto. Terça abre com <b>Filosofia</b> (8h de defasagem); quinta encaixa <b>Hidrostática</b>, que é a última aula e chega quente.</td>
+        <td>Tentar “dar conta de tudo”. É o erro que quebra o cronograma. Terça e quinta não são dias de produção — são dias de <em>preservação</em>.</td>
+      </tr>
+      <tr style="background:var(--critica-bg)">
+        <td><b>Triagem</b></td><td>Sexta</td><td>1h30, corte rígido às 17h</td>
+        <td>Oito aulas pesadas em 90 minutos. Só três coisas: captura ampliada, Química D0 (duas aulas) e o fecho de semana. Matemática e Biologia <b>já estão agendadas para sábado</b> — não são dívida.</td>
+        <td>Passar das 17h, ou tentar consolidar as oito aulas. O teto existe porque você o definiu; um limite que você não respeita deixa de ser limite.</td>
+      </tr>
+      <tr>
+        <td><b>Fim de semana</b></td><td>Sábado, Domingo</td><td>4h05 / 2h40</td>
+        <td>Sábado = vestibular + interleaving + redação + transbordo da sexta + correção de erros. Domingo = revisão espaçada + simulado + planejamento, terminando às 13h10.</td>
+        <td>Usar o sábado como despejo do que não foi feito. O que está <em>planejado</em> para sábado é bloco; o que “sobrou” da semana morre (ver seção 13).</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <span class="tag">Por que os blocos estão nessa ordem</span>
+    <p>A janela abre às 15h30, quando o alerta pós-almoço ainda está se recuperando. Por isso o primeiro bloco é sempre <b>captura</b> — carga baixa, funciona como rampa. Depois vem a <b>prática profunda mais difícil</b>, no pico de alerta da tarde. O bloco conceitual leve fecha, e o Anki pega os últimos 10 minutos, já em declínio.</p>
+  <p>Uma exceção deliberada na segunda: a Química vem <em>antes</em> da Matemática, às 15h57 e não às 16h45. Normalmente o bloco mais pesado iria mais tarde — mas aqui vale mais capturar a aula enquanto ela tem uma hora de idade do que esperar o pico de alerta. <b>Frescor do traço ganha de alerta máximo</b> quando a diferença é de apenas 50 minutos. Nos dias comprimidos a rampa é encurtada, e o pós-academia recebe exclusivamente Anki — a única tarefa cognitiva que sobrevive a 90 minutos de treino.</p>
+  </div>
+</div></section>
+
+<!-- 10 REVISOES -->
+<section id="s10"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Plano de revisões</h2></div>
+  <p class="sec-sub">A peça que faltava no 1º semestre. É isto que impede a queda de 8,0 para 4,5.</p>
+
+  <h3>Calendário de espaçamento</h3>
+  <p>Todo conteúdo novo entra no sistema no dia da aula e reaparece em intervalos crescentes. Você não gerencia isso manualmente — o Anki gerencia. O que você controla é <b>alimentar o sistema todo dia</b>.</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Contato</th><th>Quando</th><th>Formato</th><th>Duração</th></tr></thead>
+    <tbody>
+      <tr><td><b>Codificação</b></td><td>Na aula</td><td>Anotar. Só isso.</td><td>—</td></tr>
+      <tr><td><b>1ª recuperação</b></td><td>D0 · mesmo dia, na captura</td><td>Fechar o caderno e escrever as perguntas. Recuperar de memória.</td><td>10–15 min</td></tr>
+      <tr><td><b>2ª recuperação</b></td><td>D+1</td><td>Anki</td><td>~2 min por tópico</td></tr>
+      <tr><td><b>3ª recuperação</b></td><td>D+3</td><td>Anki</td><td>~1 min</td></tr>
+      <tr><td><b>4ª recuperação</b></td><td>D+7 · reforçada no bloco de sábado ou domingo</td><td>Anki + questões</td><td>~3 min</td></tr>
+      <tr><td><b>5ª recuperação</b></td><td>D+16, D+35…</td><td>Anki (intervalos crescentes)</td><td>~1 min</td></tr>
+      <tr style="background:var(--forte-bg)"><td><b>Recuperação global</b></td><td>Todo domingo</td><td>Simulado interleaved de 20 questões</td><td>45 min</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>O que vira cartão, por disciplina</h3>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Disciplina</th><th>Cartões/semana</th><th>Tipo de cartão</th><th>Cuidado específico</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--critica-bg)"><td><b>Química</b><br><span style="font-size:11.5px;color:var(--muted)">3 baralhos separados</span></td><td class="num">18–24</td><td><b>Relações proporcionais</b>, não fórmulas. “Se X dobra, o que acontece com Y — e por quê?” Um baralho para cada módulo: Físico-Química, Energia Molecular, Orgânica.</td><td>Cartão de conta é inútil. O que precisa ficar automático é a montagem. Separe os módulos — eles caem juntos na mesma prova, mas confundi-los é o erro mais caro.</td></tr>
+      <tr><td><b>Matemática</b></td><td class="num">6–10</td><td>Identidades, condições de existência, armadilhas de sinal.</td><td>Não faça cartão de “como resolver” — isso se treina resolvendo.</td></tr>
+      <tr><td><b>Física</b></td><td class="num">6–10</td><td>Condições de aplicação de cada princípio. “Quando <em>não</em> vale conservação de energia?”</td><td>O erro de Física é quase sempre escolher o princípio errado, não errar a álgebra.</td></tr>
+      <tr><td><b>História</b></td><td class="num">12–18</td><td>Datas + <b>2 cartões de causa</b> por tópico.</td><td>Cronologia sozinha não é cobrada. Causalidade é.</td></tr>
+      <tr><td><b>Geografia</b></td><td class="num">8–12</td><td>Conceitos + um esquema visual por tema.</td><td>Dual coding: o mapa desenhado de memória vale mais que o mapa consultado.</td></tr>
+      <tr><td><b>Biologia</b></td><td class="num">10–14</td><td>Nomenclatura + processos. <b>Bio-Celular</b> (módulo novo) é puramente conceitual: organelas, funções, processos. Genética se treina com problemas, não com cartões.</td><td>Separe os módulos — Bio-Celular vira cartão, Genética vira exercício.</td></tr>
+      <tr style="background:var(--importante-bg)"><td><b>Filosofia</b></td><td class="num">8</td><td>Tese do autor + a objeção principal a ela.</td><td>São os cartões mais importantes do seu Anki — 7 dias de intervalo entre aulas.</td></tr>
+      <tr style="background:var(--importante-bg)"><td><b>Sociologia</b></td><td class="num">8</td><td>Conceito + exemplo concreto.</td><td>Idem.</td></tr>
+      <tr><td><b>Português</b></td><td class="num">6–10</td><td>Literatura: características do período + uma obra-âncora. Gramática: só as regras que você já errou.</td><td>Redação não tem cartão. Tem reescrita.</td></tr>
+      <tr><td><b>Inglês</b></td><td class="num">0</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warn">
+    <span class="tag">Erro clássico a evitar</span>
+    <p>Fazer cartões bonitos é procrastinação disfarçada de estudo. Um cartão leva <b>30 segundos</b> para ser criado: pergunta de um lado, resposta de outro, sem formatação. Se você está gastando 20 min “montando o baralho”, você parou de estudar. A regra: <b>o cartão nasce durante a captura ou durante a correção de um erro. Nunca em uma sessão dedicada.</b></p>
+  </div>
+</div></section>
+
+<!-- 11 LICOES -->
+<section id="s11"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Estratégia para lições de casa</h2></div>
+  <p class="sec-sub">A lição não é uma obrigação a ser despachada antes do estudo. Ela é a sessão de recuperação mais barata que existe — se você a fizer do jeito certo.</p>
+
+  <div class="callout">
+    <span class="tag">A diferença que muda tudo</span>
+    <p>Resolver a lição <b>com o caderno aberto ao lado</b> é reconhecimento. Resolver <b>de memória, e só depois conferir</b>, é recuperação. As duas coisas parecem igualmente produtivas enquanto você as faz — e produzem resultados completamente diferentes na prova. A sensação de dificuldade é o sinal de que está funcionando.</p>
+  </div>
+
+  <h3>Protocolo de 4 passos</h3>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th class="num">#</th><th>Passo</th><th>Tempo</th><th>O que fazer</th><th>Por quê</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><b>Recall da teoria</b></td><td>3–5 min</td><td>Caderno <em>fechado</em>. Escreva do zero o que a aula ensinou. Depois abra e compare.</td><td>Expõe as lacunas antes que você as esconda com a consulta.</td></tr>
+      <tr><td class="num">2</td><td><b>Resolver sem consulta</b></td><td>o que a lição pedir</td><td>Travou? Marque com um <code>?</code> e <b>siga em frente</b>. Só consulte no fim.</td><td>Consultar a cada travada destrói o efeito de teste e transforma a lição em cópia.</td></tr>
+      <tr><td class="num">3</td><td><b>Corrigir com marca</b></td><td>5 min</td><td>Caneta de outra cor. Cada erro recebe uma frase: <em>“errei porque…”</em>. Distinga <b>erro de descuido</b> de <b>erro conceitual</b>.</td><td>Erro de descuido se resolve com atenção. Erro conceitual precisa virar cartão. Confundir os dois faz você estudar a coisa errada.</td></tr>
+      <tr><td class="num">4</td><td><b>Converter</b></td><td>2 min</td><td>Cada erro conceitual vira 1 flashcard e entra no log. Nada mais.</td><td>É o que faz o erro de hoje não voltar em novembro.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Onde a lição encaixa</h3>
+  <ul class="plain">
+    <li><b>Regra geral:</b> a lição de uma disciplina é resolvida <em>dentro</em> do bloco daquela disciplina, no dia da aula. Ela não é uma tarefa separada — ela <b>é</b> o bloco de prática.</li>
+    <li><b>Disciplina sem bloco naquele dia:</b> a lição é registrada na captura e resolvida no primeiro bloco disponível. Se for de humanas e curta, cabe no bloco conceitual. Se for longa, vai para o sábado.</li>
+    <li><b>Lição de Química:</b> sempre no mesmo dia (terça ou quinta), dentro do bloco de Química D0. Nunca adiada — é o conteúdo com maior custo de esquecimento e menor frequência de aula.</li>
+    <li><b>Lição de Inglês e do curso:</b> não entram em nenhum bloco de estudo. São entregas. Ter e Qui, pós-academia, junto do Anki.</li>
+    <li><b>Trabalhos e projetos:</b> não improvise. Quando aparecer um, ele consome o bloco conceitual leve (sexta ou o de sábado) durante o número de dias necessário. Nunca o bloco de Química.</li>
+  </ul>
+</div></section>
+
+<!-- 12 SIMULADOS -->
+<section id="s12"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Estratégia para simulados</h2></div>
+  <p class="sec-sub">Um simulado sem correção ativa é uma prova que você fez de graça. O valor está inteiramente no que vem depois.</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Tipo</th><th>Frequência</th><th>Formato</th><th>Duração</th><th>Função</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--forte-bg)">
+        <td><b>Simulado semanal</b></td><td>Todo domingo</td><td>20 objetivas misturando as 10 disciplinas</td><td>45 min + 40 de correção</td>
+        <td><b>Espelha o Dia 5.</b> Treina a habilidade específica que ele cobra: trocar de disciplina a cada questão, sem aquecimento. Também é o seu principal indicador de retenção.</td>
+      </tr>
+      <tr>
+        <td><b>Simulado mensal</b></td><td>1º sábado do mês</td><td>~45 questões, blocos por área</td><td>2h30</td>
+        <td>Substitui os três blocos da manhã de sábado. Treina resistência e gestão de tempo. <b>Nunca em semana de prova.</b></td>
+      </tr>
+      <tr>
+        <td><b>Questões de vestibular</b></td><td>Todo sábado</td><td>Dentro dos blocos de Quím/Mat/Fís</td><td>—</td>
+        <td>FUVEST, Unicamp, Unesp. Entram desde já, <em>mesmo com o conteúdo incompleto</em>: encontrar uma questão que você não consegue resolver é informação, não fracasso.</td>
+      </tr>
+      <tr style="background:var(--critica-bg)">
+        <td><b>Simulado pré-Dia 5</b></td><td><b>sáb 22/08</b></td><td>40 objetivas interleaved</td><td>1h30 + correção</td>
+        <td>Ensaio geral da avaliação integradora. Cai no sábado 22 porque a véspera real do Dia 5 (qui 27) é comprimida — o ensaio precisa acontecer antes da semana de prova.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <span class="tag">A regra 1:2</span>
+    <p>Para cada minuto de simulado, reserve <b>dois minutos de correção ativa</b>. Isso significa: 45 min de prova → 40 min de correção (a razão fica próxima o suficiente). Corrigir não é conferir o gabarito. É <b>refazer a questão errada do zero, sem olhar a solução</b>, e só depois comparar. Se você acertar na refação, era descuido. Se errar de novo, é conceito — e vira cartão. Essa distinção é a coisa mais valiosa que um simulado produz, e é a que 90% dos estudantes joga fora.</p>
+  </div>
+
+  <div class="callout note">
+    <span class="tag">Sobre errar muito no começo</span>
+    <p>Nas primeiras semanas você vai errar bastante nas questões de vestibular, porque o conteúdo de 2º ano ainda está incompleto. Isso é esperado e é o desenho. Uma questão que você tenta e erra, antes de aprender o conteúdo, deixa o conteúdo mais fácil de aprender depois. Não troque as questões difíceis por questões fáceis para se sentir melhor — a sensação de fluência é o pior preditor de nota que existe.</p>
+  </div>
+</div></section>
+
+<!-- 13 CONTINGENCIA -->
+<section id="s13"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">13</span><h2>Plano de contingência</h2></div>
+  <p class="sec-sub">Este é o capítulo que decide se você ainda está executando o plano em novembro. Um cronograma que exige 100% de execução tem 0% de chance de sobreviver.</p>
+
+  <div class="callout good">
+    <span class="tag">A regra dos 80%</span>
+    <p><b>O plano está sendo cumprido se você executa 80% dos blocos.</b> Não 100%. Oitenta por cento é o alvo, não o consolo. Uma semana com 16 de 20 blocos feitos é uma semana bem-sucedida — e você deve tratá-la como tal, porque a alternativa (sentir que falhou toda vez que a vida acontece) é o mecanismo exato pelo qual planejamentos morrem em três semanas.</p>
+  </div>
+
+  <h3>Hierarquia de corte</h3>
+  <p>Quando o tempo apertar, corte <b>de baixo para cima</b>. Nunca improvise a ordem.</p>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th class="num">Ordem</th><th>O que cortar</th><th>Custo</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1º</td><td>Leitura leve de Literatura (dom)</td><td>Desprezível</td></tr>
+      <tr><td class="num">2º</td><td>Humanas rotativas (sáb)</td><td>Baixo — o Anki cobre</td></tr>
+      <tr><td class="num">3º</td><td>Bloco conceitual leve (seg/qua)</td><td>Baixo</td></tr>
+      <tr><td class="num">4º</td><td>Questões de vestibular (sáb)</td><td>Médio — perde preparo de longo prazo, não nota da escola</td></tr>
+      <tr><td class="num">5º</td><td>Simulado semanal</td><td>Alto — só corte duas semanas seguidas se for inevitável</td></tr>
+      <tr style="background:var(--critica-bg)"><td class="num">—</td><td><b>NUNCA:</b> Captura D0 · Anki diário · Bloco de Química · Correção de erros de sábado</td><td>São o sistema. Sem eles não existe plano, existe uma lista.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Cenários</h3>
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Cenário</th><th>O que fazer</th><th>O que NÃO fazer</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Perdi um dia inteiro</b></td>
+        <td>Faça só a captura do dia (15 min, à noite se preciso) e o Anki. O resto <b>morre</b>. O dia seguinte é normal.</td>
+        <td>Empilhar no sábado. Um dia perdido custa um dia. Um sábado sobrecarregado custa a semana seguinte.</td>
+      </tr>
+      <tr>
+        <td><b>Perdi a semana (doença, viagem)</b></td>
+        <td>Volte apenas com as camadas 1 e 3 (captura + Anki, 25 min/dia) por 3 dias. Depois retome o cronograma cheio.</td>
+        <td>Tentar “recuperar” dobrando o volume. É a receita para desistir na semana seguinte.</td>
+      </tr>
+      <tr>
+        <td><b>Semana com prova ou trabalho grande</b></td>
+        <td>Ative o regime da semana S4: zero conteúdo novo, blocos viram revisão da matéria da prova. Volume ~60%.</td>
+        <td>Manter o cronograma padrão <em>e</em> estudar para a prova. Não cabe.</td>
+      </tr>
+      <tr>
+        <td><b>Cansaço acumulado</b></td>
+        <td><b>Semana leve a cada 6 semanas:</b> 60% do volume, mantendo captura + Anki + Química. É o mesmo princípio do <em>deload</em> da academia — a adaptação acontece na recuperação, não no estímulo. Sugestão: primeira semana leve logo após as provas de setembro.</td>
+        <td>Empurrar até quebrar. O sinal de alerta é você começar a “estudar” relendo — significa que a carga cognitiva disponível acabou.</td>
+      </tr>
+      <tr>
+        <td><b>Um bloco falha 3 semanas seguidas</b></td>
+        <td>O bloco está mal desenhado, não você. Mude o horário, encurte, ou elimine. Um bloco que nunca acontece é ruído no papel.</td>
+        <td>Se culpar. Diagnóstico &gt; culpa, sempre.</td>
+      </tr>
+      <tr>
+        <td><b>Sono &lt; 7h por 3 noites</b></td>
+        <td>Corte o bloco conceitual e durma. Consolidação de memória acontece dormindo — estudar com déficit de sono é jogar o estudo fora.</td>
+        <td>Trocar sono por estudo. É o único trade negativamente lucrativo do plano inteiro.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout note">
+    <span class="tag">Sobre a academia e o curso</span>
+    <p>Nenhum cenário acima toca nos seus compromissos fixos. Academia 5×/semana e curso de inglês continuam intocados — inclusive na semana de prova. A única exceção proposta no plano inteiro é a <b>negociação de reposição para as aulas de 25 e 27/08</b>, que são as duas vésperas críticas, e ainda assim isso é uma sugestão sua para conversar com o curso, não um corte.</p>
+  </div>
+</div></section>
+
+<!-- 14 INDICADORES -->
+<section id="s14"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">14</span><h2>Indicadores de desempenho</h2></div>
+  <p class="sec-sub">Nota é indicador atrasado — quando ela chega, o bimestre já acabou. Estes são os indicadores adiantados: eles avisam antes.</p>
+
+  <div class="table-scroll"><table class="wide">
+    <thead><tr><th>Indicador</th><th>Frequência</th><th>Meta</th><th>Sinal vermelho</th><th>O que ele detecta</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--estavel-bg)">
+        <td><b>Taxa de execução</b><br><span style="font-size:12px;color:var(--muted)">blocos feitos ÷ planejados</span></td>
+        <td>Semanal (dom)</td><td class="num">≥ 80%</td><td>&lt; 65% por 2 semanas</td>
+        <td>Se o cronograma cabe na vida real. Este é o indicador mais importante das primeiras 4 semanas — antes de melhorar a nota, é preciso conseguir executar.</td>
+      </tr>
+      <tr>
+        <td><b>Taxa de acerto no simulado</b><br><span style="font-size:12px;color:var(--muted)">por disciplina</span></td>
+        <td>Semanal (dom)</td><td>Tendência de alta</td><td>Queda em 3 domingos seguidos</td>
+        <td>Retenção real. É o único número que prevê o Dia 5.</td>
+      </tr>
+      <tr style="background:var(--critica-bg)">
+        <td><b>Erros repetidos</b><br><span style="font-size:12px;color:var(--muted)">nº de erros que voltam no log</span></td>
+        <td>Semanal (sáb)</td><td>Tendência de queda</td><td>Mesmo erro 3×</td>
+        <td>O indicador mais honesto do boletim. Erro que volta é conceito não consertado — e é o que reprova em novembro.</td>
+      </tr>
+      <tr>
+        <td><b>Cartas maduras no Anki</b><br><span style="font-size:12px;color:var(--muted)">intervalo &gt; 21 dias</span></td>
+        <td>Quinzenal</td><td>Crescente</td><td>Fila de atrasadas &gt; 100</td>
+        <td>Se a camada 3 está viva. Fila estourada = você parou de fazer o Anki e ainda não admitiu.</td>
+      </tr>
+      <tr>
+        <td><b>Redações escritas</b></td><td>Semanal</td><td class="num">1 / semana</td><td>0 por 2 semanas</td>
+        <td>É o único conteúdo que não se recupera depois. Redação não se estuda em novembro.</td>
+      </tr>
+      <tr>
+        <td><b>Química: proporção escrita</b><br><span style="font-size:12px;color:var(--muted)">% de questões em que você montou a proporção antes de calcular</span></td>
+        <td>Semanal</td><td class="num">100%</td><td>&lt; 80%</td>
+        <td>Se o hábito específico que a sua Química exige está se formando. É o indicador mais preditivo da sua nota de Química.</td>
+      </tr>
+      <tr>
+        <td><b>Sono</b></td><td>Diário</td><td class="num">≥ 7h</td><td>3 noites &lt; 6h30</td>
+        <td>Consolidação de memória. Tratado aqui como variável de estudo, não de estilo de vida — porque é.</td>
+      </tr>
+      <tr>
+        <td><b>Entregas de Inglês</b></td><td>Semanal (sex)</td><td class="num">100%</td><td>1 atraso</td>
+        <td>A única alavanca de Inglês. Custo zero, retorno alto.</td>
+      </tr>
+      <tr style="background:var(--forte-bg)">
+        <td><b>Projeção de pontos</b><br><span style="font-size:12px;color:var(--muted)">atual + m3×3 + m4×3</span></td>
+        <td>Após cada prova</td><td>≥ 60 em tudo</td><td>&lt; 47,5 projetado</td>
+        <td>Onde você realmente está. Recalcule com as notas reais e compare com a tabela da seção 4.</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout">
+    <span class="tag">Como usar isto sem virar burocracia</span>
+    <p>São 15 minutos, domingo, no bloco de planejamento. Uma linha por indicador numa nota do celular. Se você criar uma planilha bonita para acompanhar os indicadores, você inventou uma nova forma de procrastinar. <b>O log de erros é o único registro que precisa de capricho</b> — tudo o mais é um número anotado.</p>
+  </div>
+</div></section>
+
+<!-- 15 FINAL -->
+<section id="s15"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">15</span><h2>Recomendações finais</h2></div>
+  <div class="final">
+    <span class="eyebrow">O que fazer com isto</span>
+    <h2>Oito regras. O resto é execução.</h2>
+    <p>Este documento tem quinze seções, mas se você esquecer catorze e lembrar destas oito, o semestre já terá sido reconstruído.</p>
+    <ol>
+      <li><b>Comece amanhã, dia 10, com o cronograma cheio.</b> A margem de instalação suave acabou: são 10 dias letivos até a prova. A meta que não pode falhar nenhum dia é a captura D0 — não é modesta, é a que carrega cinco disciplinas e prepara o Dia 5.</li>
+      <li><b>Nunca abra o caderno antes de tentar lembrar.</b> Vale para a lição, para a revisão, para o simulado. A sensação de dificuldade é o preço da retenção. Fluência confortável é a sensação de estar esquecendo.</li>
+      <li><b>Em Química, escreva a proporção antes de calcular. Sempre. Em toda questão.</b> O seu curso ensina por raciocínio proporcional; o que precisa virar automático é a montagem, não a conta. Cem por cento das questões, sem exceção — é o único hábito deste plano que eu pediria para você tratar como inegociável.</li>
+      <li><b>Banque no 3º bimestre.</b> Um 7,5 em agosto e setembro derruba a exigência do 4º bimestre para menos de 2,7 em <em>todas</em> as disciplinas. A margem que você constrói agora é a que te protege em novembro, quando o cansaço chegar — e ele vai chegar.</li>
+      <li><b>Segunda-feira é o seu novo dia mais valioso.</b> Química como última aula, janela nobre 65 minutos depois, e Sociologia — a matéria de menor colchão — no mesmo dia. Se uma semana tiver que ser salva por um único dia, que seja a segunda.</li>
+      <li><b>Antecipe Matemática, Geografia e Sociologia para o sábado 22/08.</b> São as três do Dia 3, cuja véspera (ter 25) é comprimida. Química e Física agora têm vésperas nobres — a antecipação mudou de alvo com o calendário novo, e é a decisão mais importante do plano de agosto.</li>
+      <li><b>Inglês recebe zero horas de estudo e cem por cento de entrega.</b> Não é preguiça, é alocação. Cada hora não gasta ali é uma hora em Química, que é onde a nota e o vestibular se encontram.</li>
+      <li><b>80% é sucesso.</b> O plano foi desenhado com folga porque a vida tem imprevistos. Quando um dia cair, ele morre — não se acumula. A hierarquia de corte da seção 13 existe para você não ter que decidir sob pressão o que sacrificar.</li>
+    </ol>
+    <p style="margin-top:22px">Um último ponto, honesto: <b>16h15 semanais de estudo próprio é uma base sólida para o 2º ano, não é volume de aprovado na Poli.</b> O salto de volume acontece no 3º ano. O que você constrói agora não é quantidade de horas — é o <em>sistema</em> que vai tornar aquelas horas produtivas quando elas chegarem. Um aluno que entra no 3º ano com Anki alimentado, log de erros funcionando e o hábito da recuperação ativa instalado começa a corrida quilômetros à frente de quem só estudou mais.</p>
+    <p style="margin-top:16px">Quando sair o calendário de setembro, me manda — eu recalculo o regime pré-prova e projeto seus pontos com as notas reais de agosto.</p>
+  </div>
+</div></section>
+
+<footer class="pg"><div class="wrap">
+  <span class="rule">PLANEJAMENTO ACADÊMICO · 2º SEMESTRE · 2º ANO EM · COLÉGIO AGOSTINIANO MENDEL</span><br>
+  Base de cálculo validada contra os dez totais anuais informados · Meta 47,5/100 por disciplina · Provas B3: 24–28/08/2026 (seg a sex) · Estudo próprio: 16h15/semana · rev. 2 de 09/08/2026
+</div></footer>
+
+<script>
+  var prog=document.getElementById('progress');
+  function upd(){var h=document.documentElement;var sc=h.scrollTop||document.body.scrollTop;var mx=(h.scrollHeight-h.clientHeight)||1;prog.style.width=(sc/mx*100)+'%';}
+  window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+  var links=[].slice.call(document.querySelectorAll('nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function spy(){var pos=window.scrollY+90;var idx=0;for(var i=0;i<secs.length;i++){if(secs[i]&&secs[i].offsetTop<=pos)idx=i;}
+    links.forEach(function(l,i){l.classList.toggle('active',i===idx);});
+    var a=links[idx];if(a&&a.parentNode.scrollWidth>a.parentNode.clientWidth){a.parentNode.scrollLeft=a.offsetLeft-90;}}
+  window.addEventListener('scroll',spy,{passive:true});spy();
+</script>
+</body>
+</html>
